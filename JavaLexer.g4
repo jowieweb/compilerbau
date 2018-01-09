@@ -1,11 +1,11 @@
 grammar JavaLexer;
 
-r : .*? CLASS IDENTIFIER (EXTENDS IDENTIFIER)? (IMPLEMENTS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK  .*;
+r : class_def+ ;
 
 WS :			[ \t\n\r]		-> skip;
 COMMENT:		'/*' .*? '*/'	-> skip;
 LINE_COMMENT:	'//' ~[\r\n]*	-> skip;
-STUFF : ('.' | ',' | ';' | '=' | '-' | '+' | '*' | '/') -> skip;
+STUFF : ('=' | '-' | '+' | '*' | '/') -> skip;
 
 // Keywords
 CLASS : 'class';
@@ -36,19 +36,26 @@ LCBRACK : '{';
 RCBRACK : '}';
 LSQBRACK : '[';
 RSQBRACK : ']';
+SEMICOLON : ';';
 
 IDENTIFIER: Letter LetterOrDigit*;
-CONSTRUCTOR: ACCESSMOD? METHODSIG METHODBODY  ;
+//CONSTRUCTOR: ACCESSMOD? METHODSIG METHODBODY  ;
 
-ACCESSMOD: PUBLIC | PRIVATE | PROTECTED;
-PARAMETER: DATATYPE IDENTIFIER;
-DATATYPE: INTEGER | DOUBLE | FLOAT | STRING | LONG | SHORT | BYTE | IDENTIFIER;
-METHODSIG: IDENTIFIER LBRACK (PARAMETER(',' PARAMETER)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
-METHODBODY: LCBRACK  RBRACK;
+accessmod: PUBLIC | PRIVATE | PROTECTED;
+parameter: datatype IDENTIFIER;
+//METHODBODY: LCBRACK RBRACK;
+
+method_sig : IDENTIFIER LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
+method_call : ((IDENTIFIER '.')?IDENTIFIER LBRACK IDENTIFIER(',' IDENTIFIER)*) RBRACK SEMICOLON;
+method : method_sig LCBRACK (variable | method_call)* RCBRACK;
+variable : datatype IDENTIFIER SEMICOLON;
+attribute : accessmod? variable;
+datatype: INTEGER | DOUBLE | FLOAT | STRING | LONG | SHORT | BYTE | IDENTIFIER;
+class_def : accessmod? CLASS IDENTIFIER (EXTENDS IDENTIFIER)? (IMPLEMENTS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK (method | attribute | class_def)* RCBRACK;
 
 //DECIMAL_LITERAL: [+-]? [1-9] [0-9]*;
 
-fragment Digits
+fragment Digitss
 	: [0-9] ([0-9_]* [0-9])?
 	;
 
