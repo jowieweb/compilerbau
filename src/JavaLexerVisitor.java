@@ -129,4 +129,16 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitClass_name(JavaLexerParser.Class_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#interface_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInterface_name(JavaLexerParser.Interface_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#method_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMethod_name(JavaLexerParser.Method_nameContext ctx);
 }

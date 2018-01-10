@@ -206,4 +206,24 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitClass_name(JavaLexerParser.Class_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#interface_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterInterface_name(JavaLexerParser.Interface_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#interface_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitInterface_name(JavaLexerParser.Interface_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#method_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethod_name(JavaLexerParser.Method_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#method_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethod_name(JavaLexerParser.Method_nameContext ctx);
 }

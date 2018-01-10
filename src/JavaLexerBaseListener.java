@@ -250,6 +250,30 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitClass_name(JavaLexerParser.Class_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInterface_name(JavaLexerParser.Interface_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInterface_name(JavaLexerParser.Interface_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethod_name(JavaLexerParser.Method_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethod_name(JavaLexerParser.Method_nameContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
