@@ -1,6 +1,6 @@
 grammar JavaLexer;
 
-r : (interface | class_def)* ;
+r : (interface_def | class_def)* ;
 
 WS :			[ \t\n\r]		-> skip;
 COMMENT:		'/*' .*? '*/'	-> skip;
@@ -58,7 +58,7 @@ accessmod: PUBLIC | PRIVATE | PROTECTED;
 parameter: datatype (LSQBRACK RSQBRACK)? IDENTIFIER (LSQBRACK RSQBRACK)?;
 //METHODBODY: LCBRACK RBRACK;
 
-constructor : accessmod? STATIC? IDENTIFIER LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK scope_body* RCBRACK;
+constructor : accessmod? STATIC? class_name LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK scope_body* RCBRACK;
 method_sig : accessmod? (STATIC | ABSTRACT)? (datatype | VOID) IDENTIFIER LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
 method_call : (IDENTIFIER DOT)?IDENTIFIER (LPBRACK datatype? RPBRACK)? LBRACK (method_call_param)? RBRACK;
 method_call_param : (method_call | STRING_CONST | IDENTIFIER | Digitss) (('+' | '-' | '*' | '/') method_call_param)? (',' (STRING_CONST | IDENTIFIER | Digitss))* ;
@@ -72,8 +72,9 @@ datatype: INTEGER | DOUBLE | FLOAT | STRING | LONG | SHORT | BYTE | IDENTIFIER (
 scope_body : expression SEMICOLON| method_call SEMICOLON | for_loop | while_loop | scope;
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
 while_loop : WHILE LBRACK expression? condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
-class_def : accessmod? ABSTRACT? CLASS IDENTIFIER (EXTENDS IDENTIFIER)? (IMPLEMENTS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
-interface : accessmod? INTERFACE IDENTIFIER (EXTENDS IDENTIFIER)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
+class_def : accessmod? ABSTRACT? CLASS class_name (EXTENDS IDENTIFIER)? (IMPLEMENTS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
+interface_def : accessmod? INTERFACE IDENTIFIER (EXTENDS IDENTIFIER)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
+class_name : IDENTIFIER;
 //DECIMAL_LITERAL: [+-]? [1-9] [0-9]*;
 
 Digitss
