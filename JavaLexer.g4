@@ -1,6 +1,6 @@
 grammar JavaLexer;
 
-r : class_def+ ;
+r : (interface | class_def)* ;
 
 WS :			[ \t\n\r]		-> skip;
 COMMENT:		'/*' .*? '*/'	-> skip;
@@ -73,6 +73,7 @@ scope_body : expression SEMICOLON| method_call SEMICOLON | for_loop | while_loop
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
 while_loop : WHILE LBRACK expression? condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 class_def : accessmod? ABSTRACT? CLASS IDENTIFIER (EXTENDS IDENTIFIER)? (IMPLEMENTS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
+interface : accessmod? INTERFACE IDENTIFIER (EXTENDS IDENTIFIER)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
 //DECIMAL_LITERAL: [+-]? [1-9] [0-9]*;
 
 Digitss
