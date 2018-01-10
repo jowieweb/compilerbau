@@ -1,3 +1,4 @@
+import org.antlr.v4.runtime.tree.TerminalNode;
 import pojo.*;
 
 import java.util.ArrayList;
@@ -55,6 +56,16 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		method.setParameters(getParameterListFromParameterContext(ctx.parameter()));
 
 		getCurrentScope().getMethods().add(method);
+	}
+
+	public void enterExpression(JavaLexerParser.ExpressionContext ctx) {
+		System.out.println("Expression: " + ctx.getText());
+
+		if (ctx.IDENTIFIER() != null) {
+			for (TerminalNode id : ctx.IDENTIFIER()) {
+				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(id.getText());
+			}
+		}
 	}
 
 	public void enterAttribute(JavaLexerParser.AttributeContext ctx) {

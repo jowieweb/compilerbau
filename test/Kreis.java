@@ -10,6 +10,7 @@ class Kreis extends Figur implements Flaeche {
   }
 
   public String Malte(ArrayList<Integer> niklas) {
+	String bjoern;
 	return "Hallo";
   }
 }

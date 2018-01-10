@@ -10,9 +10,11 @@ public class Method {
 	private String methodName;
 	private ArrayList<Parameter> parameters;
 	private boolean isConstructor;
+	private ArrayList<String> identifiers;
 
 	public Method() {
 		this.parameters = new ArrayList<>();
+		this.identifiers = new ArrayList<>();
 	}
 
 	public String getAccessModifier() {
@@ -69,5 +71,13 @@ public class Method {
 
 	public void setConstructor(boolean constructor) {
 		isConstructor = constructor;
+	}
+
+	public ArrayList<String> getIdentifiers() {
+		return identifiers;
+	}
+
+	public void setIdentifiers(ArrayList<String> identifiers) {
+		this.identifiers = identifiers;
 	}
 }
