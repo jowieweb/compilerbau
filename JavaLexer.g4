@@ -59,10 +59,10 @@ parameter: datatype (LSQBRACK RSQBRACK)? IDENTIFIER (LSQBRACK RSQBRACK)?;
 //METHODBODY: LCBRACK RBRACK;
 
 constructor : accessmod? STATIC? IDENTIFIER LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK scope_body* RCBRACK;
-method_sig : accessmod? STATIC? (datatype | VOID) IDENTIFIER LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
+method_sig : accessmod? (STATIC | ABSTRACT)? (datatype | VOID) IDENTIFIER LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
 method_call : (IDENTIFIER DOT)?IDENTIFIER (LPBRACK datatype? RPBRACK)? LBRACK (method_call_param)? RBRACK;
 method_call_param : (method_call | STRING_CONST | IDENTIFIER | Digitss) (('+' | '-' | '*' | '/') method_call_param)? (',' (STRING_CONST | IDENTIFIER | Digitss))* ;
-method : method_sig LCBRACK scope_body* RCBRACK;
+method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
 expression : (RETURN (THIS DOT)? | THIS DOT | datatype)? IDENTIFIER ((DOT | (( '+' | '-' | '*' | '/' )? '='? (LBRACK IDENTIFIER RBRACK)?) LBRACK* NEW? (method_call | IDENTIFIER | Digitss+))+ | '++' | '--')? RBRACK*;
 condition : LBRACK* ((IDENTIFIER? ('<=' | '>=' | '<' | '>' | '==' | '&' | '|' ) (Digitss | IDENTIFIER | method_call('.' (method_call | IDENTIFIER))*)) | TRUE | FALSE) RBRACK*? condition?;
@@ -72,7 +72,7 @@ datatype: INTEGER | DOUBLE | FLOAT | STRING | LONG | SHORT | BYTE | IDENTIFIER (
 scope_body : expression SEMICOLON| method_call SEMICOLON | for_loop | while_loop | scope;
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
 while_loop : WHILE LBRACK expression? condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
-class_def : accessmod? CLASS IDENTIFIER (EXTENDS IDENTIFIER)? (IMPLEMENTS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
+class_def : accessmod? ABSTRACT? CLASS IDENTIFIER (EXTENDS IDENTIFIER)? (IMPLEMENTS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
 //DECIMAL_LITERAL: [+-]? [1-9] [0-9]*;
 
 Digitss
