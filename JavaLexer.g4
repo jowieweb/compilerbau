@@ -25,6 +25,7 @@ RETURN : 'return';
 TRUE : 'true';
 FALSE : 'false';
 NEW : 'new';
+FINAL : 'final';
 
 // Loops
 FOR : 'for';
@@ -64,15 +65,15 @@ method_call : ((THIS DOT)? (class_name DOT)*) method_name (LPBRACK datatype? RPB
 method_call_param : (method_call | STRING_CONST | IDENTIFIER | Digits) (('+' | '-' | '*' | '/') method_call_param)? (',' (STRING_CONST | IDENTIFIER | Digits))* ;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
-expression : (RETURN (THIS DOT)? | THIS DOT | datatype)? IDENTIFIER ((DOT | (( '+' | '-' | '*' | '/' )? '='? (LBRACK IDENTIFIER RBRACK)?) LBRACK* NEW? (method_call (DOT method_call)* | IDENTIFIER | Digits+))+ | '++' | '--')? RBRACK*;
+expression : (RETURN (STRING_CONST | ((THIS DOT)? IDENTIFIER(DOT IDENTIFIER)*)) | THIS DOT | datatype? IDENTIFIER)  ((DOT | (( '+' | '-' | '*' | '/' )? '='? (LBRACK IDENTIFIER RBRACK)?) LBRACK* NEW? (method_call (DOT method_call)* | IDENTIFIER | Digits+))+ | '++' | '--')? RBRACK*;
 condition : LBRACK* ((IDENTIFIER? ('<=' | '>=' | '<' | '>' | '==' | '&' | '|' ) (Digits | IDENTIFIER | method_call(DOT (method_call | IDENTIFIER))*)) | TRUE | FALSE) RBRACK*? condition?;
 variable : datatype IDENTIFIER;
-attribute : accessmod? variable SEMICOLON;
+attribute : accessmod? STATIC? FINAL? variable SEMICOLON;
 datatype: INTEGER | DOUBLE | FLOAT | STRING | LONG | SHORT | BYTE | IDENTIFIER (LPBRACK datatype RPBRACK)?;
 scope_body : expression SEMICOLON| method_call method_call* SEMICOLON | for_loop | while_loop | scope;
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
 while_loop : WHILE LBRACK expression? condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
-class_def : accessmod? ABSTRACT? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
+class_def : accessmod? ABSTRACT? STATIC? FINAL? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
 interface_def : accessmod? INTERFACE interface_name (EXTENDS IDENTIFIER)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
 class_name : IDENTIFIER;
 interface_name : IDENTIFIER;

@@ -1,25 +1,30 @@
 package pojo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class ClassInfo {
+public class ClassInfo implements GetMethods {
 	private ArrayList<ClassInfo> relations;
 	private ArrayList<Attribute> attributes;
 	private ArrayList<Method> methods;
 	private ArrayList<ClassInfo> innerClasses;
 	private ArrayList<Interface> interfaces;
+	private ArrayList<String> implementedInterfaces;
 	private ClassInfo parent;
+	private String accessModifier;
 	private String name;
 	private boolean staticFlag;
 	private boolean abstractFlag;
+	private boolean finalFlag;
 
-	public ClassInfo() {
+	public ClassInfo(String className) {
 		this.relations = new ArrayList<>();
 		this.attributes = new ArrayList<>();
 		this.attributes = new ArrayList<>();
 		this.methods = new ArrayList<>();
 		this.innerClasses = new ArrayList<>();
 		this.interfaces = new ArrayList<>();
+		this.name = className;
 	}
 
 	public ArrayList<ClassInfo> getRelations() {
@@ -92,5 +97,43 @@ public class ClassInfo {
 
 	public void setAbstractFlag(boolean abstractFlag) {
 		this.abstractFlag = abstractFlag;
+	}
+
+	public ArrayList<String> getImplementedInterfaces() {
+		return implementedInterfaces;
+	}
+
+	public void setImplementedInterfaces(ArrayList<String> implementedInterfaces) {
+		this.implementedInterfaces = implementedInterfaces;
+	}
+
+	public String getAccessModifier() {
+		return accessModifier;
+	}
+
+	public void setAccessModifier(String accessModifier) {
+		this.accessModifier = accessModifier;
+	}
+
+	public boolean isFinalFlag() {
+		return finalFlag;
+	}
+
+	public void setFinalFlag(boolean finalFlag) {
+		this.finalFlag = finalFlag;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ClassInfo classInfo = (ClassInfo) o;
+		return Objects.equals(name, classInfo.name);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(name);
 	}
 }

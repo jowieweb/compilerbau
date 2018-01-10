@@ -4,6 +4,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.IOException;
 
@@ -22,9 +23,10 @@ public class Main extends JavaLexerBaseVisitor {
 			JavaLexerParser parser = new JavaLexerParser(tokens);
 			ParseTree parseTree = parser.r();
 
-			LukeTreeWalker walker = new LukeTreeWalker();
-
-			System.out.println(walker.visit(parseTree));
+			//LukeTreeWalker walker = new LukeTreeWalker();
+			LukeTreeListener luke = new LukeTreeListener();
+			ParseTreeWalker walker = new ParseTreeWalker();
+			walker.walk(luke, parseTree);
 
 		} catch (IOException e) {
 			e.printStackTrace();

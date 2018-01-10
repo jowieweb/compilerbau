@@ -9,6 +9,7 @@ public class Method {
 	private boolean abstractFlag;
 	private String methodName;
 	private ArrayList<Parameter> parameters;
+	private boolean isConstructor;
 
 	public Method() {
 		this.parameters = new ArrayList<>();
@@ -60,5 +61,13 @@ public class Method {
 
 	public void setParameters(ArrayList<Parameter> parameters) {
 		this.parameters = parameters;
+	}
+
+	public boolean isConstructor() {
+		return isConstructor;
+	}
+
+	public void setConstructor(boolean constructor) {
+		isConstructor = constructor;
 	}
 }

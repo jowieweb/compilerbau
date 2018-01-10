@@ -6,6 +6,11 @@ public class Attribute {
 	private String dataType;
 	private String name;
 
+	public Attribute(String dataType, String name) {
+		this.dataType = dataType;
+		this.name = name;
+	}
+
 	public String getAccessModifier() {
 		return accessModifier;
 	}
