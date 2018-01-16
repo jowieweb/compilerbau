@@ -2,45 +2,20 @@ package pojo;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
-public class Interface implements GetMethods {
-	private String accessModifier;
-	private String name;
-	private ArrayList<Method> methods;
+public class Interface extends GetMethods {
 	private Interface baseInterface;
 
 	public Interface(String name) {
-		this.methods = new ArrayList<>();
 		this.name = name;
-	}
-
-	public String getAccessModifier() {
-		return accessModifier;
-	}
-
-	public void setAccessModifier(String accessModifier) {
-		this.accessModifier = accessModifier;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ArrayList<Method> getMethods() {
-		return methods;
+		y = 10;
+		w = 300;
 	}
 
 	@Override
 	public ArrayList<Attribute> getAttributes() {
 		return null;
-	}
-
-	public void setMethods(ArrayList<Method> methods) {
-		this.methods = methods;
 	}
 
 	public Interface getBaseInterface() {
@@ -63,5 +38,34 @@ public class Interface implements GetMethods {
 	public int hashCode() {
 
 		return Objects.hash(name);
+	}
+
+	public String toUML(ArrayList<GetMethods> parsed) {
+
+		x = 10 + (classCount * 350);
+		classCount++;
+
+		h = 75 + (15 * (methods.size()));
+
+		StringBuilder sb = new StringBuilder();
+		Random r = new Random();
+		sb.append("<element><id>UMLClass</id><coordinates>");
+		sb.append("<x>" + x + "</x>");
+		sb.append("<y>" + y + "</y>");
+		sb.append("<w>" + w + "</w>");
+		sb.append("<h>" + h + "</h> </coordinates>");
+		sb.append("<panel_attributes>");
+		sb.append("&lt;&lt;interface&gt;&gt;\n" + this.name);
+		sb.append("\n--\n");
+
+		sb.append("--\n");
+
+		for (Method mt : this.methods) {
+			sb.append(mt.toString() + "\n");
+		}
+
+		sb.append("</panel_attributes>");
+		sb.append("<additional_attributes/>\n</element>");
+		return sb.toString();
 	}
 }

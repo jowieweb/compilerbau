@@ -8,6 +8,25 @@ class Kreis extends Figur implements Flaeche {
   public double getFlaeche() {
     return Math.PI * r * r;
   }
+  
+  public double getFlaeche() {
+    return Math.PI * r * r;
+  }
+  public double getFlaeche() {
+    return Math.PI * r * r;
+  }
+  public double getFlaeche() {
+    return Math.PI * r * r;
+  }
+  public double getFlaeche() {
+    return Math.PI * r * r;
+  }
+  public double getFlaeche() {
+    return Math.PI * r * r;
+  }
+  public double getFlaeche() {
+    return Math.PI * r * r;
+  }
 
   public String Malte(ArrayList<Integer> niklas) {
 	String bjoern;

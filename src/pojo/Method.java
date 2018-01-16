@@ -101,10 +101,10 @@ public class Method {
 		}
 		sb.append(")");
 
-		sb.append(": ");
-		if(!isConstructor)
-			sb.append(returnType);
 
+		if(!isConstructor) {
+			sb.append(": " + returnType);
+		}
 		if(staticFlag){
 			sb.append("_");
 		}

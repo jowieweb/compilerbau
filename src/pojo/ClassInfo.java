@@ -1,26 +1,26 @@
 package pojo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-public class ClassInfo implements GetMethods {
+public class ClassInfo extends GetMethods {
+
+
 	private ArrayList<ClassInfo> relations;
 	private ArrayList<Attribute> attributes;
-	private ArrayList<Method> methods;
+
 	private ArrayList<ClassInfo> innerClasses;
 	private ArrayList<Interface> interfaces;
 	private ArrayList<String> implementedInterfaces;
 	private ClassInfo parent;
 	private String accessModifier;
-	private String name;
+
 	private boolean staticFlag;
 	private boolean abstractFlag;
 	private boolean finalFlag;
-	private int x;
-	private int y;
-	private int w;
-	private int h;
+
 
 
 
@@ -28,27 +28,12 @@ public class ClassInfo implements GetMethods {
 		this.relations = new ArrayList<>();
 		this.attributes = new ArrayList<>();
 		this.attributes = new ArrayList<>();
-		this.methods = new ArrayList<>();
 		this.innerClasses = new ArrayList<>();
 		this.interfaces = new ArrayList<>();
 		this.name = className;
 	}
 
-	public int getX() {
-		return x;
-	}
 
-	public int getY() {
-		return y;
-	}
-
-	public int getW() {
-		return w;
-	}
-
-	public int getH() {
-		return h;
-	}
 
 	public ArrayList<ClassInfo> getRelations() {
 		return relations;
@@ -64,14 +49,6 @@ public class ClassInfo implements GetMethods {
 
 	public void setAttributes(ArrayList<Attribute> attributes) {
 		this.attributes = attributes;
-	}
-
-	public ArrayList<Method> getMethods() {
-		return methods;
-	}
-
-	public void setMethods(ArrayList<Method> methods) {
-		this.methods = methods;
 	}
 
 	public ArrayList<ClassInfo> getInnerClasses() {
@@ -98,13 +75,6 @@ public class ClassInfo implements GetMethods {
 		this.parent = parent;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public boolean isStaticFlag() {
 		return staticFlag;
@@ -160,17 +130,52 @@ public class ClassInfo implements GetMethods {
 		return Objects.hash(name);
 	}
 
+	/**
+	 * totally effective method for filtering relations
+	 * at least for a testat ;-)
+	 * @param parsed
+	 */
+	public void filterRelations(ArrayList<GetMethods> parsed){
+		for (Method me: methods) {
+			ArrayList<String> kgw = new ArrayList<>();
+			for (String s :me.getIdentifiers()) {
+				boolean foundInList = false;
+				for (GetMethods found: parsed) {
+					if(s.equals(found.getName())){
+						foundInList = true;
+					}
+				}
+				if(!foundInList){
+					kgw.add(s);
+				}
+			}
+			for(String s:kgw){
+				me.getIdentifiers().remove(s);
+			}
+		}
+	}
 
-	public String toUML(ArrayList<String> parsed){
+	public String toUML(ArrayList<GetMethods> parsed){
+		filterRelations(parsed);
+		for (ClassInfo s :relations) {
+			System.out.println(s.getName());
+		}
+
+
+		x = 10+ (classCount * 350);
+		classCount ++;
+
+		h = 75+ (15*(methods.size() + attributes.size()));
+
 		StringBuilder sb = new StringBuilder();
 		Random r = new Random();
 		sb.append("<element><id>UMLClass</id><coordinates>");
-	 	sb.append("<x>" + r.nextInt(2000) +"</x>");
-		sb.append("<y>" + r.nextInt(2000) +"</y>");
-		sb.append("<w>" + r.nextInt(2000) +"</w>");
-		sb.append("<h>" + r.nextInt(2000) +"</h> </coordinates>");
-		sb.append("<panel_attributes>\n");
-		sb.append(this.name);
+	 	sb.append("<x>" + x +"</x>");
+		sb.append("<y>" + y +"</y>");
+		sb.append("<w>" + w +"</w>");
+		sb.append("<h>" + h +"</h> </coordinates>");
+		sb.append("<panel_attributes>");
+		sb.append(this.name );
 		sb.append("\n--\n");
 		for(Attribute at: this.attributes){
 			sb.append(at.toString() + "\n");

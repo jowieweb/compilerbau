@@ -40,7 +40,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	}
 
 	public void enterConstructor(JavaLexerParser.ConstructorContext ctx) {
-		System.out.println("Konstruktor: " + ctx.class_name().getText());
+		//System.out.println("Konstruktor: " + ctx.class_name().getText());
 		Method method = new Method();
 		method.setMethodName(ctx.class_name().getText());
 		method.setParameters(getParameterListFromParameterContext(ctx.parameter()));
@@ -51,27 +51,34 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	}
 
 	public void enterMethod_sig(JavaLexerParser.Method_sigContext ctx) {
-		System.out.println("Methode: " + ctx.method_name().getText());
+		//System.out.println("Methode: " + ctx.method_name().getText());
 		Method method = new Method();
 		method.setMethodName(ctx.method_name().getText());
 		method.setParameters(getParameterListFromParameterContext(ctx.parameter()));
 		method.setAccessModifier(ctx.accessmod().getText());
-		method.setReturnType(ctx.datatype().getText());
+		if(ctx.datatype() != null) {
+			method.setReturnType(ctx.datatype().getText());
+		} else  {
+			method.setReturnType("");
+		}
 		getCurrentScope().getMethods().add(method);
 	}
 
 	public void enterExpression(JavaLexerParser.ExpressionContext ctx) {
-		System.out.println("Expression: " + ctx.getText());
+		//System.out.println("Expression: " + ctx.getText());
 
 		if (ctx.IDENTIFIER() != null) {
 			for (TerminalNode id : ctx.IDENTIFIER()) {
 				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(id.getText());
 			}
+			if(ctx.datatype() != null){
+				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(ctx.datatype().getText());
+			}
 		}
 	}
 
 	public void enterAttribute(JavaLexerParser.AttributeContext ctx) {
-		System.out.println("Attribut: " + ctx.variable().IDENTIFIER().getText());
+		//System.out.println("Attribut: " + ctx.variable().IDENTIFIER().getText());
 		Attribute attribute = new Attribute(ctx.variable().datatype().getText(), ctx.variable().IDENTIFIER().getText());
 		if (ctx.accessmod() != null) {
 			attribute.setAccessModifier(ctx.accessmod().getText());
@@ -88,7 +95,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	}
 
 	public void enterInterface_def(JavaLexerParser.Interface_defContext ctx) {
-		System.out.println("Interface: " + ctx.interface_name().getText());
+		//System.out.println("Interface: " + ctx.interface_name().getText());
 
 		Interface i = new Interface(ctx.interface_name().getText());
 		classInfos.add(i);
@@ -124,17 +131,13 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		return parameters;
 	}
 
-	public void writeDiagramm(){
+	public String getClasses(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
-				"<diagram program=\"umlet\" version=\"14.2\">\n" +
-				"  <zoom_level>10</zoom_level>");
+
 		for (GetMethods ci:classInfos ) {
-			sb.append(ci);
+			sb.append(ci.toUML(classInfos));
+			sb.append("\n");
 		}
-		sb.append("</diagram>");
-
-
-		System.out.println(sb.toString());
+		return  sb.toString();
 	}
 }
