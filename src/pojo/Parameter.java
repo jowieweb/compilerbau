@@ -9,7 +9,7 @@ public class Parameter {
 	}
 
 	public void setDataType(String dataType) {
-		this.dataType = dataType;
+		this.dataType = dataType.replace("<", "&lt;").replace(">", "&gt;");
 	}
 
 	public String getName() {
@@ -18,5 +18,12 @@ public class Parameter {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name + ": " + dataType);
+		return sb.toString();
 	}
 }

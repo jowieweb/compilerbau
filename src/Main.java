@@ -27,6 +27,8 @@ public class Main extends JavaLexerBaseVisitor {
 			LukeTreeListener luke = new LukeTreeListener();
 			ParseTreeWalker walker = new ParseTreeWalker();
 			walker.walk(luke, parseTree);
+			luke.writeDiagramm();
+
 
 		} catch (IOException e) {
 			e.printStackTrace();

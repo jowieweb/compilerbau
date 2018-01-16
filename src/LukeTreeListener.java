@@ -45,6 +45,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		method.setMethodName(ctx.class_name().getText());
 		method.setParameters(getParameterListFromParameterContext(ctx.parameter()));
 		method.setConstructor(true);
+		method.setAccessModifier(ctx.accessmod().getText());
 
 		getCurrentScope().getMethods().add(method);
 	}
@@ -54,7 +55,8 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		Method method = new Method();
 		method.setMethodName(ctx.method_name().getText());
 		method.setParameters(getParameterListFromParameterContext(ctx.parameter()));
-
+		method.setAccessModifier(ctx.accessmod().getText());
+		method.setReturnType(ctx.datatype().getText());
 		getCurrentScope().getMethods().add(method);
 	}
 
@@ -77,6 +79,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		if (ctx.STATIC() != null) {
 			attribute.setStaticFlag(true);
 		}
+		getCurrentScope().getAttributes().add(attribute);
 	}
 
 	@Override
@@ -119,5 +122,19 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		}
 
 		return parameters;
+	}
+
+	public void writeDiagramm(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+				"<diagram program=\"umlet\" version=\"14.2\">\n" +
+				"  <zoom_level>10</zoom_level>");
+		for (GetMethods ci:classInfos ) {
+			sb.append(ci);
+		}
+		sb.append("</diagram>");
+
+
+		System.out.println(sb.toString());
 	}
 }

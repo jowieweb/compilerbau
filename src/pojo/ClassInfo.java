@@ -2,6 +2,7 @@ package pojo;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public class ClassInfo implements GetMethods {
 	private ArrayList<ClassInfo> relations;
@@ -16,6 +17,12 @@ public class ClassInfo implements GetMethods {
 	private boolean staticFlag;
 	private boolean abstractFlag;
 	private boolean finalFlag;
+	private int x;
+	private int y;
+	private int w;
+	private int h;
+
+
 
 	public ClassInfo(String className) {
 		this.relations = new ArrayList<>();
@@ -25,6 +32,22 @@ public class ClassInfo implements GetMethods {
 		this.innerClasses = new ArrayList<>();
 		this.interfaces = new ArrayList<>();
 		this.name = className;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getW() {
+		return w;
+	}
+
+	public int getH() {
+		return h;
 	}
 
 	public ArrayList<ClassInfo> getRelations() {
@@ -135,5 +158,31 @@ public class ClassInfo implements GetMethods {
 	public int hashCode() {
 
 		return Objects.hash(name);
+	}
+
+
+	public String toUML(ArrayList<String> parsed){
+		StringBuilder sb = new StringBuilder();
+		Random r = new Random();
+		sb.append("<element><id>UMLClass</id><coordinates>");
+	 	sb.append("<x>" + r.nextInt(2000) +"</x>");
+		sb.append("<y>" + r.nextInt(2000) +"</y>");
+		sb.append("<w>" + r.nextInt(2000) +"</w>");
+		sb.append("<h>" + r.nextInt(2000) +"</h> </coordinates>");
+		sb.append("<panel_attributes>\n");
+		sb.append(this.name);
+		sb.append("\n--\n");
+		for(Attribute at: this.attributes){
+			sb.append(at.toString() + "\n");
+		}
+		sb.append("--\n");
+
+		for(Method mt: this.methods){
+			sb.append(mt.toString() + "\n");
+		}
+
+		sb.append("</panel_attributes>");
+		sb.append("<additional_attributes/>\n</element>");
+		return  sb.toString();
 	}
 }

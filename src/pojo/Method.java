@@ -15,6 +15,7 @@ public class Method {
 	public Method() {
 		this.parameters = new ArrayList<>();
 		this.identifiers = new ArrayList<>();
+		this.accessModifier = "";
 	}
 
 	public String getAccessModifier() {
@@ -38,7 +39,7 @@ public class Method {
 	}
 
 	public void setReturnType(String returnType) {
-		this.returnType = returnType;
+		this.returnType = returnType.replace("<", "&lt;").replace(">", "&gt;");
 	}
 
 	public boolean isAbstractFlag() {
@@ -79,5 +80,34 @@ public class Method {
 
 	public void setIdentifiers(ArrayList<String> identifiers) {
 		this.identifiers = identifiers;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		if(staticFlag){
+			sb.append("_");
+		}
+
+		sb.append(accessModifier.replace("private", "-").replace("public", "+").replace("protected", "#"));
+		sb.append(methodName + "(");
+		for (Parameter p:parameters ) {
+			sb.append(p.toString() + ", ");
+		}
+		if(parameters.size() > 0) {
+			/* ugly? nooo just a testat :) */
+			sb.deleteCharAt(sb.length() - 1);
+			sb.deleteCharAt(sb.length() - 1);
+		}
+		sb.append(")");
+
+		sb.append(": ");
+		if(!isConstructor)
+			sb.append(returnType);
+
+		if(staticFlag){
+			sb.append("_");
+		}
+		return  sb.toString();
 	}
 }

@@ -42,4 +42,18 @@ public class Attribute {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		if(staticFlag){
+			sb.append("_");
+		}
+		sb.append(accessModifier.replace("private", "-").replace("public", "+").replace("protected", "#") + " ");
+		sb.append(name + ": " + dataType.replace("<", "&lt;").replace(">", "&gt;"));
+		if(staticFlag){
+			sb.append("_");
+		}
+		return sb.toString();
+	}
 }
