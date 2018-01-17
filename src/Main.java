@@ -1,4 +1,6 @@
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;
@@ -8,34 +10,84 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends JavaLexerBaseVisitor {
-	LukeTreeListener luke = new LukeTreeListener();
+	private static final String DEFAULT_OUTPUT_FILE = "out.uxf";
+	private LukeTreeListener luke = new LukeTreeListener();
+
+	@Parameter(names="-o", description="output file name")
+	private String outputFileName;
+
+	@Parameter(description = "Files...")
+	private List<String> files = new ArrayList<>();
 
 	public static void main(String[] args) {
-		new Main();
+		Main main = new Main();
+		main.run(args);
 	}
 
-	public Main(){
-		StringBuilder sb = new StringBuilder();
+	private void parseFiles(List<String> fileNames) {
+		File[] files = new File[fileNames.size()];
 
+		for (int i = 0; i < fileNames.size(); i++) {
+			files[i] = new File(fileNames.get(i));
+		}
 
-		for (File f : new File("test/").listFiles()) {
-			if (!f.isDirectory()) {
-				parse(f.getPath());
+		parseFiles(files);
+	}
+
+	private void parseFiles(File[] files) {
+		for (File f : files) {
+			if (f.exists()) {
+				if (f.isDirectory()) {
+					System.out.println("Betrete Verzeichnis " + f.getName());
+					parseFiles(f.listFiles());
+
+				} else {
+					parse(f.getAbsolutePath());
+					//System.out.println("Datei: " + f.getName());
+				}
 			}
 		}
+	}
+
+	private void run(String[] args) {
+		JCommander commander = JCommander.newBuilder().addObject(this).build();
+		commander.parse(args);
+
+		if (this.outputFileName == null || this.outputFileName.isEmpty()) {
+			this.outputFileName = DEFAULT_OUTPUT_FILE;
+		}
+
+		if (this.files.isEmpty()) {
+			commander.usage();
+			return;
+		}
+
+		parseFiles(this.files);
+
+		StringBuilder sb = new StringBuilder();
+
 		sb.append(getHeader());
 		sb.append(luke.getClasses());
 		sb.append(getFooter());
 
+		try {
+			Files.write(Paths.get(outputFileName), sb.toString().getBytes(StandardCharsets.UTF_8));
+
+		} catch (IOException e) {
+			System.out.println("Error saving file: " + e.getMessage());
+		}
+
 		System.out.println(sb.toString());
-
-
-
 	}
 
-	public  void parse(String path){
+	private void parse(String path){
 		try {
 			Lexer lexer = new JavaLexerLexer(CharStreams.fromFileName(path));
 
@@ -53,16 +105,13 @@ public class Main extends JavaLexerBaseVisitor {
 		}
 	}
 
-
-
-
-	public static String getHeader(){
+	private static String getHeader(){
 		return  "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
 				"<diagram program=\"umlet\" version=\"14.2\">\n" +
 				"  <zoom_level>10</zoom_level>";
 	}
 
-	public  static String getFooter(){
+	private static String getFooter(){
 		return "</diagram>";
 	}
 }

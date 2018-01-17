@@ -1,4 +1,4 @@
-// Generated from /home/nils/Nextcloud/Master/2. Semester/Compilerbau/compilerbau/JavaLexer.g4 by ANTLR 4.7
+// Generated from /home/nils/Nextcloud/Master/2. Semester/Compilerbau/Projekt/JavaLexer.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -142,6 +142,18 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCondition(JavaLexerParser.ConditionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIf_cond(JavaLexerParser.If_condContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf_cond(JavaLexerParser.If_condContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
