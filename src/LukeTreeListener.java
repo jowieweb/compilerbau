@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * May the UML be with you
+ */
 public class LukeTreeListener extends JavaLexerBaseListener {
 	private ArrayList<GetMethods> classInfos = new ArrayList<>();
 	private Stack<GetMethods> classInfoStack = new Stack<>();
@@ -138,6 +141,64 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 			sb.append(ci.toUML(classInfos));
 			sb.append("\n");
 		}
+		sb.append(getRelations());
+
 		return  sb.toString();
+	}
+
+	private int getXPos(GetMethods cl){
+		return (cl.getX() + (cl.getW()/2));
+	}
+
+	private int getYPos(GetMethods cl){
+		return cl.getY() + cl.getH();
+	}
+	private int getAY(GetMethods cl, GetMethods re){
+		return (cl.getY() +cl.getH()) -(re.getY() +re.getH());
+	}
+
+	private int getAX(GetMethods cl, GetMethods re){
+		if(cl.getX() > re.getX())
+			return cl.getX() -re.getX();
+
+		return  re.getX() - cl.getX();
+	}
+
+	public void drawRelation(StringBuilder sb,GetMethods cl, GetMethods relation, String type, int yoffset){
+		sb.append("\n<element>\n<id>Relation</id>\n<coordinates>\n");
+		sb.append("<x>" + getXPos(relation) + "</x>\n");
+		sb.append("<y>" + getYPos(relation) + "</y>\n");
+		sb.append("<w>0</w>\n<h>0</h>\n</coordinates>\n");
+		sb.append("<panel_attributes>" + type +"</panel_attributes>\n");
+		sb.append("<additional_attributes>");
+		sb.append("0.0;0.0;");
+		sb.append(getAX(cl,relation) + ".0;" + getAY(cl,relation) +".0;");
+		//sb.append((cl.getX() - relation.getX()) +".0;" + (cl.getY() - relation.getY()) + ".0;" );
+		sb.append("</additional_attributes>\n");
+		//sb.append("<additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>");
+		sb.append("</element>\n");
+	}
+
+	public String getRelations(){
+		StringBuilder sb = new StringBuilder();
+		int yoffset = 200;
+
+
+		for (GetMethods cl: classInfos) {
+
+			for (GetMethods relation: cl.getRelations()) {
+				drawRelation(sb,cl,relation,"lt=&lt;-",yoffset);
+				yoffset += 20;
+			}
+
+			for(GetMethods impl: cl.getImplementedInterfacesRef()){
+				drawRelation(sb,cl,impl,"lt=&lt;&lt;.",yoffset);
+				yoffset += 20;
+			}
+		}
+
+
+		
+		return sb.toString();
 	}
 }

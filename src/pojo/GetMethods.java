@@ -11,6 +11,7 @@ public abstract class GetMethods {
 	protected int h;
 	protected String name;
 	protected String accessModifier;
+	protected ArrayList<GetMethods> relations = new ArrayList<>();
 
 	public String getAccessModifier() {
 		return accessModifier;
@@ -54,4 +55,17 @@ public abstract class GetMethods {
 		return h;
 	}
 
+	public ArrayList<GetMethods> getRelations() {
+		return relations;
+	}
+
+	public void setRelations(ArrayList<GetMethods> relations) {
+		this.relations = relations;
+	}
+
+	public ArrayList<GetMethods> getImplementedInterfacesRef() {
+		return implementedInterfacesRef;
+	}
+
+	protected ArrayList<GetMethods> implementedInterfacesRef = new ArrayList<>();
 }
