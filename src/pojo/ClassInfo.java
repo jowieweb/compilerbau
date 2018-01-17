@@ -8,7 +8,7 @@ import java.util.Random;
 public class ClassInfo extends GetMethods {
 
 
-	private ArrayList<ClassInfo> relations;
+
 	private ArrayList<Attribute> attributes;
 
 	private ArrayList<ClassInfo> innerClasses;
@@ -35,13 +35,6 @@ public class ClassInfo extends GetMethods {
 
 
 
-	public ArrayList<ClassInfo> getRelations() {
-		return relations;
-	}
-
-	public void setRelations(ArrayList<ClassInfo> relations) {
-		this.relations = relations;
-	}
 
 	public ArrayList<Attribute> getAttributes() {
 		return attributes;
@@ -136,13 +129,16 @@ public class ClassInfo extends GetMethods {
 	 * @param parsed
 	 */
 	public void filterRelations(ArrayList<GetMethods> parsed){
+
 		for (Method me: methods) {
 			ArrayList<String> kgw = new ArrayList<>();
+
 			for (String s :me.getIdentifiers()) {
 				boolean foundInList = false;
 				for (GetMethods found: parsed) {
 					if(s.equals(found.getName())){
 						foundInList = true;
+						relations.add(found);
 					}
 				}
 				if(!foundInList){
@@ -153,14 +149,21 @@ public class ClassInfo extends GetMethods {
 				me.getIdentifiers().remove(s);
 			}
 		}
+
+		for (String s: implementedInterfaces) {
+			for (GetMethods p: parsed) {
+				if(p.getName().equals( s)){
+					implementedInterfacesRef.add(p);
+				}
+			}
+
+		}
 	}
+
+
 
 	public String toUML(ArrayList<GetMethods> parsed){
 		filterRelations(parsed);
-		for (ClassInfo s :relations) {
-			System.out.println(s.getName());
-		}
-
 
 		x = 10+ (classCount * 350);
 		classCount ++;
