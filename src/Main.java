@@ -4,7 +4,6 @@ import com.beust.jcommander.Parameter;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;
-import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
@@ -20,11 +19,20 @@ public class Main extends JavaLexerBaseVisitor {
 	private static final String DEFAULT_OUTPUT_FILE = "out.uxf";
 	private LukeTreeListener luke = new LukeTreeListener();
 
+	@Parameter(names={"-h", "--help"}, help = true)
+	private boolean help;
+
+	@Parameter(names="-u", description="Path to umlet jar")
+	private String umletJarpath = "";
+
 	@Parameter(names="-o", description="output file name")
 	private String outputFileName;
 
 	@Parameter(description = "Files...")
 	private List<String> files = new ArrayList<>();
+
+	@Parameter(names={"-e", "--export"}, description="Export diagram. Supported types: bmp, eps, gif, jpg, pdf, png, svg")
+	private String exportFormat;
 
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -64,7 +72,7 @@ public class Main extends JavaLexerBaseVisitor {
 			this.outputFileName = DEFAULT_OUTPUT_FILE;
 		}
 
-		if (this.files.isEmpty()) {
+		if (this.files.isEmpty() || this.help) {
 			commander.usage();
 			return;
 		}
@@ -77,6 +85,7 @@ public class Main extends JavaLexerBaseVisitor {
 		sb.append(luke.getClasses());
 		sb.append(getFooter());
 
+		// Save diagram
 		try {
 			Files.write(Paths.get(outputFileName), sb.toString().getBytes(StandardCharsets.UTF_8));
 
@@ -84,7 +93,38 @@ public class Main extends JavaLexerBaseVisitor {
 			System.out.println("Error saving file: " + e.getMessage());
 		}
 
+		// Convert file with UMLet if requested
+		convertWithUMLet();
+
 		System.out.println(sb.toString());
+	}
+
+	private void convertWithUMLet() {
+		if (this.exportFormat != null && !this.exportFormat.isEmpty()) {
+			if (this.umletJarpath == null || this.umletJarpath.isEmpty()) {
+				System.out.println("Path to UMLet .jar not specified. Skipping conversion.");
+				System.out.println("Use --help to display usage information.");
+				return;
+			}
+
+			try {
+				String uxfFile = new File(this.outputFileName).getAbsolutePath();
+				ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", this.umletJarpath,
+						"-action=convert", "-format=" + this.exportFormat,
+						"-filename=" + uxfFile).redirectError(ProcessBuilder.Redirect.INHERIT);
+
+				System.out.println("Starting UMLet for conversion...");
+
+				Process process = processBuilder.start();
+				int status = process.waitFor();
+				System.out.println("Umlet exited with status " + status);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void parse(String path){
