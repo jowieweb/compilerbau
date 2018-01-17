@@ -162,12 +162,15 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		return cl.getY() + cl.getH();
 	}
 	private int getAY(GetMethods cl, GetMethods re){
-		return (cl.getY() +cl.getH()) -(re.getY() +re.getH());
+		int value = cl.getY() + cl.getH();
+		value -= re.getY() + re.getH();
+		return value;
 	}
 
 	private int getAX(GetMethods cl, GetMethods re){
-		if(cl.getX() > re.getX())
-			return cl.getX() -re.getX();
+		if(cl.getX() > re.getX()) {
+			return cl.getX() - re.getX();
+		}
 
 		return  re.getX() - cl.getX();
 	}
