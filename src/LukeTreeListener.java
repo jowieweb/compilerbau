@@ -146,6 +146,10 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		StringBuilder sb = new StringBuilder();
 
 		for (GetMethods ci:classInfos ) {
+			if(ci.getParentForInnerClass() != null){
+				// dont draw inner classes double
+				continue;
+			}
 			sb.append(ci.toUML(classInfos));
 			sb.append("\n");
 		}
@@ -196,6 +200,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 
 		for (GetMethods cl: classInfos) {
+
 
 			for (GetMethods relation: cl.getRelations()) {
 				drawRelation(sb,cl,relation,"lt=&lt;-",yoffset);

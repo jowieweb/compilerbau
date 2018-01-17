@@ -94,4 +94,6 @@ public abstract class GetMethods {
 	public void setParent(GetMethods parent) {
 		this.parent = parent;
 	}
+
+
 }
