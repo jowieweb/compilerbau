@@ -10,6 +10,9 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +76,13 @@ public class Main extends JavaLexerBaseVisitor {
 		sb.append(getHeader());
 		sb.append(luke.getClasses());
 		sb.append(getFooter());
+
+		try {
+			Files.write(Paths.get(outputFileName), sb.toString().getBytes(StandardCharsets.UTF_8));
+
+		} catch (IOException e) {
+			System.out.println("Error saving file: " + e.getMessage());
+		}
 
 		System.out.println(sb.toString());
 	}

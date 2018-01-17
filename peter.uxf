@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>10</x><y>10</y><w>300</w><h>285</h> </coordinates><panel_attributes>Attribute
+--
+- accessModifier: String
+- staticFlag: boolean
+- dataType: String
+- name: String
+--
++Attribute(dataType: String, name: String)
++getAccessModifier(): String
++setAccessModifier(accessModifier: String): 
++isStaticFlag(): boolean
++setStaticFlag(staticFlag: boolean): 
++getDataType(): String
++setDataType(dataType: String): 
++getName(): String
++setName(name: String): 
++toString(): String
+</panel_attributes><additional_attributes/>
+</element>
+</diagram>
