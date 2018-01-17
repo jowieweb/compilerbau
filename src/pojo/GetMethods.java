@@ -15,6 +15,16 @@ public abstract class GetMethods {
 	protected HashSet<GetMethods> relations = new HashSet<>();
 	protected GetMethods parent;
 
+	public GetMethods getParentForInnerClass() {
+		return parentForInnerClass;
+	}
+
+	public void setParentForInnerClass(GetMethods parentForInnerClass) {
+		this.parentForInnerClass = parentForInnerClass;
+	}
+
+	protected GetMethods parentForInnerClass;
+
 	public ArrayList<GetMethods> getChildren() {
 		return children;
 	}

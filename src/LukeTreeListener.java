@@ -17,7 +17,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		ClassInfo ci = new ClassInfo(ctx.class_name(0).getText());
 		if(!classInfoStack.isEmpty()){
 			//HAS PARENT!
-			ci.setParent(classInfoStack.peek());
+			ci.setParentForInnerClass(classInfoStack.peek());
 			classInfoStack.peek().getChildren().add(ci);
 		}
 
@@ -213,5 +213,9 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 		
 		return sb.toString();
+	}
+
+	public  void clearStack(){
+		classInfoStack.clear();
 	}
 }

@@ -129,6 +129,7 @@ public class Main extends JavaLexerBaseVisitor {
 
 	private void parse(String path){
 		try {
+			luke.clearStack();
 			Lexer lexer = new JavaLexerLexer(CharStreams.fromFileName(path));
 
 			CommonTokenStream tokens = new CommonTokenStream(lexer);

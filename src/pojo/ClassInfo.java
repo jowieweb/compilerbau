@@ -159,7 +159,7 @@ public class ClassInfo extends GetMethods {
 	public String toUML(ArrayList<GetMethods> parsed){
 		StringBuilder sb = new StringBuilder();
 		filterRelations(parsed);
-		if(parent != null) {
+		if(parentForInnerClass != null) {
 			x = 10 + (classCount * 350);
 			classCount++;
 

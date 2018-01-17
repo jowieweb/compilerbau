@@ -7,21 +7,21 @@ Ding
 +machwas()
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>360</x><y>10</y><w>300</w><h>105</h> </coordinates><panel_attributes>Figur
+Figur
 --
 --
 #test(): double
 +test2()
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>90</h> </coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+<element><id>UMLClass</id><coordinates><x>360</x><y>10</y><w>300</w><h>90</h> </coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 Flaeche
 --
 --
 +getFlaeche(): double
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>1060</x><y>10</y><w>300</w><h>225</h> </coordinates><panel_attributes>Kreis
+<element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>225</h> </coordinates><panel_attributes>Kreis
 --
 - r: double
 --
@@ -36,13 +36,13 @@ Flaeche
 +Malte(niklas: ArrayList&lt;Integer&gt;): String
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>1410</x><y>10</y><w>300</w><h>90</h> </coordinates><panel_attributes>Polymorphie
+Polymorphie
 --
 --
 +main(args: String)
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>1760</x><y>10</y><w>300</w><h>105</h> </coordinates><panel_attributes>InnerClass
+<element><id>UMLClass</id><coordinates><x>1060</x><y>10</y><w>300</w><h>105</h> </coordinates><panel_attributes>InnerClass
 --
 - kreis: Kreis
 --
@@ -59,13 +59,13 @@ Flaeche
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;700.0;0.0;</additional_attributes>
+<additional_attributes>0.0;0.0;350.0;0.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
-<x>860</x>
+<x>510</x>
 <y>100</y>
 <w>0</w>
 <h>0</h>
@@ -83,42 +83,42 @@ Flaeche
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;1060.0;225.0;</additional_attributes>
+<additional_attributes>0.0;0.0;710.0;225.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
-<x>1210</x>
+<x>860</x>
 <y>235</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;350.0;-135.0;</additional_attributes>
+<additional_attributes>0.0;0.0;710.0;-225.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
-<x>510</x>
-<y>115</y>
+<x>150</x>
+<y>10</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;1050.0;-15.0;</additional_attributes>
+<additional_attributes>0.0;0.0;0.0;0.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
-<x>1560</x>
-<y>100</y>
+<x>150</x>
+<y>10</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;350.0;15.0;</additional_attributes>
+<additional_attributes>0.0;0.0;1060.0;105.0;</additional_attributes>
 </element>
 </diagram>
