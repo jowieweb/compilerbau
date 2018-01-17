@@ -159,11 +159,11 @@ public class ClassInfo extends GetMethods {
 	public String toUML(ArrayList<GetMethods> parsed){
 		StringBuilder sb = new StringBuilder();
 		filterRelations(parsed);
-		if(parentForInnerClass != null) {
+		if(parentForInnerClass == null) {
 			x = 10 + (classCount * 350);
 			classCount++;
 
-			h = 75 + (15 * (methods.size() + attributes.size()));
+			h = 75 + getHSize();
 
 			sb.append("<element><id>UMLClass</id><coordinates>");
 			sb.append("<x>" + x + "</x>");
@@ -171,8 +171,6 @@ public class ClassInfo extends GetMethods {
 			sb.append("<w>" + w + "</w>");
 			sb.append("<h>" + h + "</h> </coordinates>");
 			sb.append("<panel_attributes>");
-		} else {
-			System.out.println("PARENT");
 		}
 
 		if(abstractFlag)
@@ -194,14 +192,23 @@ public class ClassInfo extends GetMethods {
 		if(children.size() > 0)
 		{
 			for (GetMethods child: children) {
-				/*sb.append("{innerclass\n");
+				sb.append("{innerclass\n");
 				sb.append(child.toUML(parsed));
-				sb.append("\ninnerclass}\n");*/
+				sb.append("\ninnerclass}\n");
 			}
 		}
-
-		sb.append("</panel_attributes>");
-		sb.append("<additional_attributes/>\n</element>");
+		if(parentForInnerClass == null) {
+			sb.append("</panel_attributes>");
+			sb.append("<additional_attributes/>\n</element>");
+		}
 		return  sb.toString();
+	}
+
+	public  int getHSize(){
+		int size = 30;
+		for (ClassInfo ci:innerClasses) {
+			size+= ci.getHSize();
+		}
+		return (13 * (methods.size() + attributes.size() + children.size()) + size);
 	}
 }
