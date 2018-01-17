@@ -15,8 +15,16 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	@Override
 	public void enterClass_def(JavaLexerParser.Class_defContext ctx) {
 		ClassInfo ci = new ClassInfo(ctx.class_name(0).getText());
+		if(!classInfoStack.isEmpty()){
+			//HAS PARENT!
+			ci.setParent(classInfoStack.peek());
+			classInfoStack.peek().getChildren().add(ci);
+		}
+
 		classInfos.add(ci);
 		classInfoStack.push(ci);
+
+
 
 		ArrayList<String> interfaces = new ArrayList<>();
 		for (JavaLexerParser.Interface_nameContext nc : ctx.interface_name()) {
@@ -108,7 +116,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 			i.setAccessModifier(ctx.accessmod().getText());
 		}
 		if (ctx.EXTENDS() != null) {
-			i.setBaseInterface(new Interface(ctx.IDENTIFIER().getText()));
+			i.setParent((GetMethods) new Interface(ctx.IDENTIFIER().getText()));
 		}
 	}
 
@@ -195,6 +203,11 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 				drawRelation(sb,cl,impl,"lt=&lt;&lt;.",yoffset);
 				yoffset += 20;
 			}
+
+			if(cl.getParent() != null){
+				drawRelation(sb,cl,cl.getParent(),"lt=&lt;&lt;-",yoffset);
+			}
+
 		}
 
 

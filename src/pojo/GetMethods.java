@@ -1,6 +1,7 @@
 package pojo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public abstract class GetMethods {
 	public static int classCount =0;
@@ -11,7 +12,14 @@ public abstract class GetMethods {
 	protected int h;
 	protected String name;
 	protected String accessModifier;
-	protected ArrayList<GetMethods> relations = new ArrayList<>();
+	protected HashSet<GetMethods> relations = new HashSet<>();
+	protected GetMethods parent;
+
+	public ArrayList<GetMethods> getChildren() {
+		return children;
+	}
+
+	protected ArrayList<GetMethods> children = new ArrayList<>();
 
 	public String getAccessModifier() {
 		return accessModifier;
@@ -55,11 +63,11 @@ public abstract class GetMethods {
 		return h;
 	}
 
-	public ArrayList<GetMethods> getRelations() {
+	public HashSet<GetMethods> getRelations() {
 		return relations;
 	}
 
-	public void setRelations(ArrayList<GetMethods> relations) {
+	public void setRelations(HashSet<GetMethods> relations) {
 		this.relations = relations;
 	}
 
@@ -68,4 +76,12 @@ public abstract class GetMethods {
 	}
 
 	protected ArrayList<GetMethods> implementedInterfacesRef = new ArrayList<>();
+
+	public GetMethods getParent() {
+		return parent;
+	}
+
+	public void setParent(GetMethods parent) {
+		this.parent = parent;
+	}
 }

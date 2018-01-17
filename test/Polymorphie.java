@@ -29,4 +29,12 @@ public class Polymorphie
 
 	ArrayList<Auto> autos = new ArrayList<>();
   }
+  
+  class InnerClass{
+	  
+	  private Kreis kreis;
+	  public InnerClass(){}
+	  
+	  
+  }
 }

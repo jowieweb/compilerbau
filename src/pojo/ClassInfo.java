@@ -2,6 +2,7 @@ package pojo;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ public class ClassInfo extends GetMethods {
 	private ArrayList<ClassInfo> innerClasses;
 	private ArrayList<Interface> interfaces;
 	private ArrayList<String> implementedInterfaces;
-	private ClassInfo parent;
+
 	private String accessModifier;
 
 	private boolean staticFlag;
@@ -25,7 +26,7 @@ public class ClassInfo extends GetMethods {
 
 
 	public ClassInfo(String className) {
-		this.relations = new ArrayList<>();
+		this.relations = new HashSet<>();
 		this.attributes = new ArrayList<>();
 		this.attributes = new ArrayList<>();
 		this.innerClasses = new ArrayList<>();
@@ -60,13 +61,7 @@ public class ClassInfo extends GetMethods {
 		this.interfaces = interfaces;
 	}
 
-	public ClassInfo getParent() {
-		return parent;
-	}
 
-	public void setParent(ClassInfo parent) {
-		this.parent = parent;
-	}
 
 
 	public boolean isStaticFlag() {
@@ -149,9 +144,8 @@ public class ClassInfo extends GetMethods {
 				me.getIdentifiers().remove(s);
 			}
 		}
-
-		for (String s: implementedInterfaces) {
-			for (GetMethods p: parsed) {
+		for (GetMethods p: parsed) {
+			for (String s: implementedInterfaces) {
 				if(p.getName().equals( s)){
 					implementedInterfacesRef.add(p);
 				}
@@ -163,21 +157,26 @@ public class ClassInfo extends GetMethods {
 
 
 	public String toUML(ArrayList<GetMethods> parsed){
-		filterRelations(parsed);
-
-		x = 10+ (classCount * 350);
-		classCount ++;
-
-		h = 75+ (15*(methods.size() + attributes.size()));
-
 		StringBuilder sb = new StringBuilder();
-		Random r = new Random();
-		sb.append("<element><id>UMLClass</id><coordinates>");
-	 	sb.append("<x>" + x +"</x>");
-		sb.append("<y>" + y +"</y>");
-		sb.append("<w>" + w +"</w>");
-		sb.append("<h>" + h +"</h> </coordinates>");
-		sb.append("<panel_attributes>");
+		filterRelations(parsed);
+		if(parent != null) {
+			x = 10 + (classCount * 350);
+			classCount++;
+
+			h = 75 + (15 * (methods.size() + attributes.size()));
+
+			sb.append("<element><id>UMLClass</id><coordinates>");
+			sb.append("<x>" + x + "</x>");
+			sb.append("<y>" + y + "</y>");
+			sb.append("<w>" + w + "</w>");
+			sb.append("<h>" + h + "</h> </coordinates>");
+			sb.append("<panel_attributes>");
+		} else {
+			System.out.println("PARENT");
+		}
+
+		if(abstractFlag)
+			sb.append("/");
 		sb.append(this.name );
 		sb.append("\n--\n");
 		for(Attribute at: this.attributes){
@@ -187,6 +186,18 @@ public class ClassInfo extends GetMethods {
 
 		for(Method mt: this.methods){
 			sb.append(mt.toString() + "\n");
+		}
+
+		if(abstractFlag)
+			sb.append("/");
+
+		if(children.size() > 0)
+		{
+			for (GetMethods child: children) {
+				/*sb.append("{innerclass\n");
+				sb.append(child.toUML(parsed));
+				sb.append("\ninnerclass}\n");*/
+			}
 		}
 
 		sb.append("</panel_attributes>");

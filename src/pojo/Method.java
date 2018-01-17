@@ -88,6 +88,8 @@ public class Method {
 		if(staticFlag){
 			sb.append("_");
 		}
+		if(abstractFlag)
+			sb.append("/");
 
 		sb.append(accessModifier.replace("private", "-").replace("public", "+").replace("protected", "#"));
 		sb.append(methodName + "(");
@@ -103,11 +105,14 @@ public class Method {
 
 
 		if(!isConstructor) {
-			sb.append(": " + returnType);
+			if(!returnType.isEmpty())
+				sb.append(": " + returnType);
 		}
 		if(staticFlag){
 			sb.append("_");
 		}
+		if(abstractFlag)
+			sb.append("/");
 		return  sb.toString();
 	}
 }

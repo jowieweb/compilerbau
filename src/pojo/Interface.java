@@ -42,6 +42,14 @@ public class Interface extends GetMethods {
 
 	public String toUML(ArrayList<GetMethods> parsed) {
 
+		if(parent != null)
+		{
+			for(GetMethods g:parsed){
+				if(g.equals(parent))
+					parent = g;
+			}
+		}
+
 		x = 10 + (classCount * 350);
 		classCount++;
 
