@@ -75,7 +75,7 @@ expression : (RETURN (STRING_CONST | ((THIS DOT)? IDENTIFIER(DOT IDENTIFIER)*)) 
 condition : LBRACK* ((IDENTIFIER? ('<=' | '>=' | '<' | '>' | '==' | '&' | '|' )? (Digits | IDENTIFIER | method_call(DOT (method_call | IDENTIFIER))*)) | TRUE | FALSE) RBRACK*? condition?;
 if_cond : IF condition scope (ELSE (if_cond | scope))?;
 variable : datatype IDENTIFIER;
-attribute : accessmod? STATIC? FINAL? variable SEMICOLON;
+attribute : accessmod? STATIC? FINAL? variable ('=' (NEW? method_call | STRING_CONST | Digits))? SEMICOLON;
 datatype: INTEGER | DOUBLE | FLOAT | STRING | LONG | SHORT | BYTE | IDENTIFIER (LPBRACK datatype RPBRACK)?;
 scope_body : if_cond | expression SEMICOLON | method_call SEMICOLON | for_loop | while_loop | scope;
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
