@@ -1,4 +1,4 @@
-// Generated from /home/nils/Nextcloud/Master/2. Semester/Compilerbau/compilerbau/JavaLexer.g4 by ANTLR 4.7
+// Generated from /home/nils/Nextcloud/Master/2. Semester/Compilerbau/Projekt/JavaLexer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -116,6 +116,16 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCondition(JavaLexerParser.ConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#if_cond}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_cond(JavaLexerParser.If_condContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#if_cond}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_cond(JavaLexerParser.If_condContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaLexerParser#variable}.
 	 * @param ctx the parse tree

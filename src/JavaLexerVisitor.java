@@ -1,4 +1,4 @@
-// Generated from /home/nils/Nextcloud/Master/2. Semester/Compilerbau/compilerbau/JavaLexer.g4 by ANTLR 4.7
+// Generated from /home/nils/Nextcloud/Master/2. Semester/Compilerbau/Projekt/JavaLexer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -75,6 +75,12 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCondition(JavaLexerParser.ConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#if_cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_cond(JavaLexerParser.If_condContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaLexerParser#variable}.
 	 * @param ctx the parse tree
