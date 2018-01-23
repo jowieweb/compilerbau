@@ -1,6 +1,11 @@
 public class Test{
 	public void test(){
-		append("tes()");
+		try{
+			
+		}catch(Exception e){
+			
+		}
+		append("<x>" + blubber() +"");
 	}
 	
 }
