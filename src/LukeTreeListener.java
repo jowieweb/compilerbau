@@ -14,7 +14,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 	@Override
 	public void enterClass_def(JavaLexerParser.Class_defContext ctx) {
-		if(ctx.class_name().size() <= 1)
+		if(ctx.class_name().size() <= 0)
 			return;
 
 		ClassInfo ci = new ClassInfo(ctx.class_name(0).getText(),true);
@@ -85,10 +85,14 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 		if (ctx.IDENTIFIER() != null) {
 			for (TerminalNode id : ctx.IDENTIFIER()) {
-				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(id.getText());
+				List<Method> methods = getCurrentScope().getMethods();
+				if(methods != null)
+					if(methods.size() != 0){
+						getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(id.getText());
+					}
 			}
-			if(ctx.datatype() != null){
-				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(ctx.datatype().getText());
+			if(ctx.datatype().size() > 0){
+				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(ctx.datatype(0).getText());
 			}
 		}
 	}

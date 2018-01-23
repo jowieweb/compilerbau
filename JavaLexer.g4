@@ -191,4 +191,4 @@ LetterOrDigit
 	;
 
 Letter
-	: [a-zA-Z$_]; 
+	: [a-zA-Z$_];
