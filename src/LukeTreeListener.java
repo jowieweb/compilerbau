@@ -91,9 +91,16 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 						getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(id.getText());
 					}
 			}
-			if(ctx.datatype().size() > 0){
-				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(ctx.datatype(0).getText());
+			if(ctx.datatype().size() > 0) {
+				List<Method> methods = getCurrentScope().getMethods();
+				if (methods != null) {
+					if (methods.size() != 0) {
+						getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(ctx.datatype(0).getText());
+					}
+
+				}
 			}
+
 		}
 	}
 
@@ -149,7 +156,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		for(JavaLexerParser.ParameterContext pc: paramList){
 			Parameter p = new Parameter();
 			p.setDataType(pc.datatype().getText());
-			p.setName(pc.IDENTIFIER().getText());
+			p.setName(pc.IDENTIFIER(0).getText());
 			parameters.add(p);
 		}
 

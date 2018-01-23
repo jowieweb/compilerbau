@@ -47,7 +47,7 @@ public class LukeTreeWalker extends JavaLexerBaseVisitor<Void> {
 		for(JavaLexerParser.ParameterContext pc: paramList){
 			Parameter p = new Parameter();
 			p.setDataType(pc.datatype().getText());
-			p.setName(pc.IDENTIFIER().getText());
+			p.setName(pc.IDENTIFIER(0).getText());
 			parameters.add(p);
 		}
 
