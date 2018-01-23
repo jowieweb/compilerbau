@@ -7,11 +7,14 @@ import java.util.Random;
 public class Interface extends GetMethods {
 	private Interface baseInterface;
 
-	public Interface(String name) {
+	public Interface(String name, boolean found) {
 		this.name = name;
 		y = 10;
 		w = 300;
+		this.found = found;
 	}
+
+
 
 	@Override
 	public ArrayList<Attribute> getAttributes() {
