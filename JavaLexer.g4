@@ -84,7 +84,7 @@ condition : LBRACK* (('!'? (method_call(DOT method_call)* | IDENTIFIER)? comp_op
 if_cond : IF condition scope (ELSE (if_cond | scope))?;
 variable_def : datatype IDENTIFIER var_assign? (',' IDENTIFIER var_assign?)* ;
 
-var_assign : '=' LCBRACK? (NEW? method_call | STRING_CONST | Digits | NULL) (',' (NEW? method_call | STRING_CONST | Digits | NULL))* RCBRACK?;
+var_assign : '=' LCBRACK? expression RCBRACK?;//(NEW? method_call | STRING_CONST | Digits | NULL) (',' (NEW? method_call | STRING_CONST | Digits | NULL))* RCBRACK?;
 attribute : accessmod? STATIC? FINAL? variable_def SEMICOLON;
 datatype: (INTEGER
 		| DOUBLE
