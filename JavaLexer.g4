@@ -97,10 +97,11 @@ method_call_param : cast? (NEW? method_call (DOT method_call)* | THIS | STRING_C
 cast : LBRACK IDENTIFIER(DOT IDENTIFIER)* generic_type_name? RBRACK;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
-expression : (RETURN? LBRACK*? (THIS DOT)? (IDENTIFIER (DOT IDENTIFIER)* (LSQBRACK IDENTIFIER RSQBRACK)? '=')? (STRING_CONST
+expression : (RETURN? LBRACK*? (THIS DOT)? (datatype? IDENTIFIER (DOT IDENTIFIER)* (LSQBRACK IDENTIFIER RSQBRACK)? '=')? (STRING_CONST
 							| datatype? (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* ('++' | '--')?
 							| TRUE
 							| FALSE
+							| RETURN
 							| LBRACK* cast? THROW? (IDENTIFIER (DOT IDENTIFIER)*)? RBRACK* DOT? NEW? method_call (DOT method_call)*) RBRACK* LBRACK* ((DOT
 								| IDENTIFIER
 								| STRING_CONST
@@ -109,14 +110,14 @@ expression : (RETURN? LBRACK*? (THIS DOT)? (IDENTIFIER (DOT IDENTIFIER)* (LSQBRA
 condition : (LBRACK*?
 	(
 		('!'? LBRACK*?
-			(method_call(DOT method_call)* | IDENTIFIER (DOT IDENTIFIER)* | Digits) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
+			(method_call(DOT method_call)* | (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* | Digits) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
 				(math_op?
 					(NULL | HexDigits | Digits | IDENTIFIER (DOT IDENTIFIER)* | (IDENTIFIER DOT)* method_call(DOT (method_call | IDENTIFIER (DOT IDENTIFIER)*))* RBRACK*)
 				)*
 			) | TRUE | FALSE
 		) RBRACK*?
 		comp_op?
-	)+;
+	)+ RBRACK*;
 if_cond : IF condition (scope | scope_body) (ELSE (if_cond | scope | scope_body))?;
 variable_def : datatype IDENTIFIER var_assign? (',' IDENTIFIER var_assign?)* ;
 var_assign : '=' LCBRACK? (expression | STRING_CONST | Digits | NULL) (',' (expression | STRING_CONST | HexDigits | Digits | NULL))* RCBRACK?;
