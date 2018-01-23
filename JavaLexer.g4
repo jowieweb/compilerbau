@@ -68,8 +68,8 @@ parameter: datatype (LSQBRACK RSQBRACK)? IDENTIFIER (LSQBRACK RSQBRACK)?;
 
 constructor : accessmod? STATIC? class_name LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK scope_body* RCBRACK;
 method_sig : accessmod? (STATIC | ABSTRACT)? (datatype | VOID) method_name LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
-method_call : ((THIS DOT)? (class_name DOT)*) method_name (LPBRACK datatype? RPBRACK)? LBRACK (method_call_param(',' method_call_param)*)? RBRACK;
-method_call_param : cast? (NEW? method_call (DOT method_call)* | STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE) (math_op (STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE | (method_call(DOT method_call))))* ;
+method_call : (THIS DOT)? (class_name DOT)* method_name (LPBRACK datatype? RPBRACK)? LBRACK (method_call_param(',' method_call_param)*)? RBRACK;
+method_call_param : cast? (NEW? method_call (DOT method_call)* | STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE) (math_op (STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE | (method_call(DOT method_call)*)))* ;
 cast : LBRACK IDENTIFIER(DOT IDENTIFIER)* RBRACK;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
