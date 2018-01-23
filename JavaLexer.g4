@@ -59,7 +59,18 @@ SEMICOLON : ';';
 DOT : '.';
 
 IDENTIFIER: '_'* Letter ('_' | LetterOrDigit)*;
-STRING_CONST : '"' (.*? | '\\"')* '"';
+STRING_CONST : '"' (~["\\\r\n] | EscapeSequence)* '"';// '"' (.*? | '\\"') '"';
+fragment EscapeSequence
+    : '\\' [btnfr"'\\]
+    | '\\' ([0-3]? [0-7])? [0-7]
+    | '\\' 'u'+ HexDigit HexDigit HexDigit HexDigit
+    ;
+
+fragment HexDigit
+    : [0-9a-fA-F]
+    ;
+
+
 //CONSTRUCTOR: ACCESSMOD? METHODSIG METHODBODY  ;
 
 accessmod: PUBLIC | PRIVATE | PROTECTED;
