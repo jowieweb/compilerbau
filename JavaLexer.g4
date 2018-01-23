@@ -72,13 +72,12 @@ method_call : ((THIS DOT)? (class_name DOT)*) method_name (LPBRACK datatype? RPB
 method_call_param : (LBRACK IDENTIFIER(DOT IDENTIFIER)* RBRACK)? (NEW? method_call (DOT method_call)* | STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE) (math_op (STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE | (method_call(DOT method_call))))* ;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
-expression : (RETURN LBRACK*? STRING_CONST
-							| THIS DOT
+expression : (RETURN? LBRACK*? (THIS DOT)? (STRING_CONST
 							| datatype? (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* ('++' | '--')?
-							| method_call (DOT method_call)*) RBRACK* LBRACK* ((DOT
+							| (IDENTIFIER (DOT IDENTIFIER)*)? method_call (DOT method_call)*) RBRACK* LBRACK* ((DOT
 								| (math_op? '='? (LBRACK IDENTIFIER RBRACK)?) LBRACK* NEW? (method_call (DOT method_call)* math_op? (method_call (DOT method_call)*)?
 								| IDENTIFIER
-								| Digits+))+)? RBRACK*;
+								| Digits+))+)?) RBRACK*;
 condition : LBRACK* (('!'? (method_call(DOT method_call)* | IDENTIFIER)? comp_op? '!'? (NULL | Digits | IDENTIFIER | method_call(DOT (method_call | IDENTIFIER))*)) | TRUE | FALSE) RBRACK? condition?;
 if_cond : IF condition scope (ELSE (if_cond | scope))?;
 variable : datatype IDENTIFIER;
