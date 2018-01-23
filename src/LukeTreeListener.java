@@ -14,6 +14,9 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 	@Override
 	public void enterClass_def(JavaLexerParser.Class_defContext ctx) {
+		if(ctx.class_name().size() <= 1)
+			return;
+
 		ClassInfo ci = new ClassInfo(ctx.class_name(0).getText(),true);
 		if(!classInfoStack.isEmpty()){
 			//HAS PARENT!
@@ -32,7 +35,8 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		}
 
 		if (ctx.EXTENDS() != null) {
-			ci.setParent(new ClassInfo(ctx.class_name(1).getText(),false));
+			if(ctx.class_name().size() > 1)
+				ci.setParent(new ClassInfo(ctx.class_name(1).getText(),false));
 		}
 
 		ci.setImplementedInterfaces(interfaces);
@@ -66,7 +70,8 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		Method method = new Method();
 		method.setMethodName(ctx.method_name().getText());
 		method.setParameters(getParameterListFromParameterContext(ctx.parameter()));
-		method.setAccessModifier(ctx.accessmod().getText());
+		if(ctx.accessmod() != null)
+			method.setAccessModifier(ctx.accessmod().getText());
 		if(ctx.datatype() != null) {
 			method.setReturnType(ctx.datatype().getText());
 		} else  {
@@ -102,7 +107,8 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 	@Override
 	public void exitClass_def(JavaLexerParser.Class_defContext ctx) {
-		classInfoStack.pop();
+		if(!classInfoStack.isEmpty())
+			classInfoStack.pop();
 	}
 
 	public void enterInterface_def(JavaLexerParser.Interface_defContext ctx) {
