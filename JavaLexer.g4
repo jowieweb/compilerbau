@@ -102,10 +102,11 @@ for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRAC
 for_each_loop : FOR LBRACK variable ':' (method_call | IDENTIFIER) RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 while_loop : WHILE LBRACK expression? condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 class_def : accessmod? ABSTRACT? STATIC? FINAL? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
-interface_def : accessmod? INTERFACE interface_name (EXTENDS IDENTIFIER)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
-class_name : IDENTIFIER;
-interface_name : IDENTIFIER;
+interface_def : accessmod? INTERFACE interface_name  (EXTENDS class_name)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
+class_name : IDENTIFIER generic_type_name?;
+interface_name : IDENTIFIER generic_type_name?;
 method_name : IDENTIFIER;
+generic_type_name : LPBRACK IDENTIFIER RPBRACK;
 comp_op : '<='
 		| '>='
 		| '<'
