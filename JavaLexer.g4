@@ -84,39 +84,37 @@ fragment HexDigit
 HexDigits: '0x' HexDigit+;
 
 
-//CONSTRUCTOR: ACCESSMOD? METHODSIG METHODBODY  ;
-
 accessmod: PUBLIC | PRIVATE | PROTECTED;
 parameter: datatype (LSQBRACK RSQBRACK)? IDENTIFIER (DOT IDENTIFIER)* (LSQBRACK RSQBRACK)?;
-//METHODBODY: LCBRACK RBRACK;
 
 constructor : accessmod? STATIC? class_name LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)? scope;
 method_sig : accessmod? (STATIC | ABSTRACT)? FINAL? (datatype | VOID) method_name (THROWS IDENTIFIER)? LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
 method_call : (THIS DOT)? (class_name DOT)* method_name (LPBRACK datatype? RPBRACK)? (LBRACK | LSQBRACK) (method_call_param(',' method_call_param)*)? (RBRACK | RSQBRACK);
-method_call_param : cast? (NEW? method_call (DOT method_call)* | THIS | STRING_CONST | ((IDENTIFIER DOT)+ | THIS DOT)? IDENTIFIER (DOT CLASS)? | Digits | TRUE | FALSE) (math_op (STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE | method_call (DOT method_call)* ))* ;
+method_call_param : cast? (NEW? method_call (DOT method_call)* | THIS | STRING_CONST | ((IDENTIFIER DOT)+ | THIS DOT)? IDENTIFIER (DOT CLASS)? | Digits | TRUE | FALSE) (math_op (STRING_CONST | (THIS DOT)? IDENTIFIER | Digits | TRUE | FALSE | method_call (DOT method_call)* ))* ;
 cast : LBRACK IDENTIFIER(DOT IDENTIFIER)* generic_type_name? RBRACK;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
-expression : (RETURN? LBRACK*? (THIS DOT)? (IDENTIFIER (DOT IDENTIFIER)* (LSQBRACK IDENTIFIER RSQBRACK)? '=')? (STRING_CONST
+expression : (RETURN? LBRACK*? (THIS DOT)? (datatype? IDENTIFIER (DOT IDENTIFIER)* (LSQBRACK IDENTIFIER RSQBRACK)? '=')? (STRING_CONST
 							| datatype? (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* ('++' | '--')?
 							| TRUE
 							| FALSE
+							| RETURN
 							| LBRACK* cast? THROW? (IDENTIFIER (DOT IDENTIFIER)*)? RBRACK* DOT? NEW? method_call (DOT method_call)*) RBRACK* LBRACK* ((DOT
 								| IDENTIFIER
 								| STRING_CONST
-								| ((math_op | '=' )? (LBRACK IDENTIFIER RBRACK)?) LBRACK* NEW? (method_call (DOT method_call)* math_op? (method_call (DOT method_call)*)?
+								| (math_op? '='? (LBRACK IDENTIFIER RBRACK)?) LBRACK* NEW? (method_call (DOT method_call)* math_op? (method_call (DOT method_call)*)?
 								| Digits+))+)? math_op?)+ RBRACK*;
 condition : (LBRACK*?
 	(
 		('!'? LBRACK*?
-			(method_call(DOT method_call)* | IDENTIFIER (DOT IDENTIFIER)* | Digits) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
+			(method_call(DOT method_call)* | (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* | Digits) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
 				(math_op?
 					(NULL | HexDigits | Digits | IDENTIFIER (DOT IDENTIFIER)* | (IDENTIFIER DOT)* method_call(DOT (method_call | IDENTIFIER (DOT IDENTIFIER)*))* RBRACK*)
 				)*
 			) | TRUE | FALSE
 		) RBRACK*?
 		comp_op?
-	)+;
+	)+ RBRACK*;
 if_cond : IF condition (scope | scope_body) (ELSE (if_cond | scope | scope_body))?;
 variable_def : datatype IDENTIFIER var_assign? (',' IDENTIFIER var_assign?)* ;
 var_assign : '=' LCBRACK? (expression | STRING_CONST | Digits | NULL) (',' (expression | STRING_CONST | HexDigits | Digits | NULL))* RCBRACK?;
@@ -133,15 +131,15 @@ datatype: (INTEGER
 scope_body : if_cond
 		| try_block
 		| switch_block
+		| expression SEMICOLON
 		| for_loop
 		| for_each_loop
 		| do_while_loop
 		| while_loop
-		| expression SEMICOLON
 		| method_call (DOT method_call)* SEMICOLON
 		| scope;
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
-for_each_loop : FOR LBRACK variable_def ':' (method_call | IDENTIFIER) RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
+for_each_loop : FOR LBRACK variable_def ':' (method_call (DOT method_call)* | IDENTIFIER (DOT IDENTIFIER)*) RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 while_loop : WHILE LBRACK condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 do_while_loop : DO scope WHILE LBRACK condition RBRACK SEMICOLON;
 class_def : accessmod? ABSTRACT? STATIC? FINAL? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (static_block | constructor | method | attribute | class_def)* RCBRACK;
@@ -176,7 +174,6 @@ math_op : '+'
 		| '&'
 		| '^'
 		| '~';
-//DECIMAL_LITERAL: [+-]? [1-9] [0-9]*;
 
 Digits
 	: [0-9] ([0-9_]* [0-9])?
