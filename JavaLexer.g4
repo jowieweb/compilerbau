@@ -59,7 +59,7 @@ SEMICOLON : ';';
 DOT : '.';
 
 IDENTIFIER: '_'* Letter ('_' | LetterOrDigit)*;
-STRING_CONST : '"' .*? '"';
+STRING_CONST : '"' (.*? | '\"')* '"';
 //CONSTRUCTOR: ACCESSMOD? METHODSIG METHODBODY  ;
 
 accessmod: PUBLIC | PRIVATE | PROTECTED;
