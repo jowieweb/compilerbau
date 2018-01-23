@@ -11,7 +11,7 @@ public class LukeTreeWalker extends JavaLexerBaseVisitor<Void> {
 
 	public  LukeTreeWalker(){
 		classInfo = new ArrayList<>();
-		currentClass = new ClassInfo("");
+		currentClass = new ClassInfo("",false);
 		classInfo.add(currentClass);
 	}
 
@@ -28,7 +28,7 @@ public class LukeTreeWalker extends JavaLexerBaseVisitor<Void> {
 	public Void visitClass_def(JavaLexerParser.Class_defContext ctx) {
 		System.out.println("Class_def: " + ctx.class_name(0).getText());
 		currentClass.setName(ctx.class_name(0).getText());
-
+		currentClass.found = true;
 		return super.visitClass_def(ctx);
 	}
 

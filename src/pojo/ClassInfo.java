@@ -25,13 +25,14 @@ public class ClassInfo extends GetMethods {
 
 
 
-	public ClassInfo(String className) {
+	public ClassInfo(String className, boolean found ) {
 		this.relations = new HashSet<>();
 		this.attributes = new ArrayList<>();
 		this.attributes = new ArrayList<>();
 		this.innerClasses = new ArrayList<>();
 		this.interfaces = new ArrayList<>();
 		this.name = className;
+		this.found = found;
 	}
 
 
@@ -148,6 +149,11 @@ public class ClassInfo extends GetMethods {
 			for (String s: implementedInterfaces) {
 				if(p.getName().equals( s)){
 					implementedInterfacesRef.add(p);
+				}
+			}
+			if(parent != null) {
+				if (parent.equals(p)) {
+					this.parent = p;
 				}
 			}
 

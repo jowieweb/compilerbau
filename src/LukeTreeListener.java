@@ -14,7 +14,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 	@Override
 	public void enterClass_def(JavaLexerParser.Class_defContext ctx) {
-		ClassInfo ci = new ClassInfo(ctx.class_name(0).getText());
+		ClassInfo ci = new ClassInfo(ctx.class_name(0).getText(),true);
 		if(!classInfoStack.isEmpty()){
 			//HAS PARENT!
 			ci.setParentForInnerClass(classInfoStack.peek());
@@ -32,7 +32,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		}
 
 		if (ctx.EXTENDS() != null) {
-			ci.setParent(new ClassInfo(ctx.class_name(1).getText()));
+			ci.setParent(new ClassInfo(ctx.class_name(1).getText(),false));
 		}
 
 		ci.setImplementedInterfaces(interfaces);
@@ -108,7 +108,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	public void enterInterface_def(JavaLexerParser.Interface_defContext ctx) {
 		//System.out.println("Interface: " + ctx.interface_name().getText());
 
-		Interface i = new Interface(ctx.interface_name().getText());
+		Interface i = new Interface(ctx.interface_name().getText(),true);
 		classInfos.add(i);
 		classInfoStack.push(i);
 
@@ -116,7 +116,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 			i.setAccessModifier(ctx.accessmod().getText());
 		}
 		if (ctx.EXTENDS() != null) {
-			i.setParent((GetMethods) new Interface(ctx.IDENTIFIER().getText()));
+			i.setParent((GetMethods) new Interface(ctx.IDENTIFIER().getText(),false));
 		}
 	}
 
@@ -180,6 +180,9 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	}
 
 	public void drawRelation(StringBuilder sb,GetMethods cl, GetMethods relation, String type, int yoffset){
+		if(!relation.found ){
+			return;
+		}
 		sb.append("\n<element>\n<id>Relation</id>\n<coordinates>\n");
 		sb.append("<x>" + getXPos(relation) + "</x>\n");
 		sb.append("<y>" + getYPos(relation) + "</y>\n");

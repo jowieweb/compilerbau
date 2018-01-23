@@ -14,6 +14,7 @@ public abstract class GetMethods {
 	protected String accessModifier;
 	protected HashSet<GetMethods> relations = new HashSet<>();
 	protected GetMethods parent;
+	public boolean found = false;
 
 	public GetMethods getParentForInnerClass() {
 		return parentForInnerClass;

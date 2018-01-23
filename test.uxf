@@ -56,6 +56,12 @@ InnerClass
 innerclass}
 </panel_attributes><additional_attributes/>
 </element>
+<element><id>UMLClass</id><coordinates><x>1760</x><y>10</y><w>300</w><h>118</h> </coordinates><panel_attributes>Test
+--
+--
++test()
+</panel_attributes><additional_attributes/>
+</element>
 
 <element>
 <id>Relation</id>
@@ -84,13 +90,13 @@ innerclass}
 <element>
 <id>Relation</id>
 <coordinates>
-<x>150</x>
-<y>10</y>
+<x>510</x>
+<y>141</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;1060.0;235.0;</additional_attributes>
+<additional_attributes>0.0;0.0;700.0;104.0;</additional_attributes>
 </element>
 
 <element>
