@@ -99,6 +99,18 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCast(JavaLexerParser.CastContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCast(JavaLexerParser.CastContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMethod(JavaLexerParser.MethodContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -159,13 +171,25 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable(JavaLexerParser.VariableContext ctx) { }
+	@Override public void enterVariable_def(JavaLexerParser.Variable_defContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariable(JavaLexerParser.VariableContext ctx) { }
+	@Override public void exitVariable_def(JavaLexerParser.Variable_defContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVar_assign(JavaLexerParser.Var_assignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVar_assign(JavaLexerParser.Var_assignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -214,6 +238,18 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFor_loop(JavaLexerParser.For_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFor_each_loop(JavaLexerParser.For_each_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFor_each_loop(JavaLexerParser.For_each_loopContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -279,6 +315,18 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStatic_block(JavaLexerParser.Static_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatic_block(JavaLexerParser.Static_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMethod_name(JavaLexerParser.Method_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -286,6 +334,42 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMethod_name(JavaLexerParser.Method_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGeneric_type_name(JavaLexerParser.Generic_type_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGeneric_type_name(JavaLexerParser.Generic_type_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComp_op(JavaLexerParser.Comp_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComp_op(JavaLexerParser.Comp_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMath_op(JavaLexerParser.Math_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMath_op(JavaLexerParser.Math_opContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

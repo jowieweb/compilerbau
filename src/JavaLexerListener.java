@@ -77,6 +77,16 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 */
 	void exitMethod_call_param(JavaLexerParser.Method_call_paramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#cast}.
+	 * @param ctx the parse tree
+	 */
+	void enterCast(JavaLexerParser.CastContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#cast}.
+	 * @param ctx the parse tree
+	 */
+	void exitCast(JavaLexerParser.CastContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaLexerParser#method}.
 	 * @param ctx the parse tree
 	 */
@@ -127,15 +137,25 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 */
 	void exitIf_cond(JavaLexerParser.If_condContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JavaLexerParser#variable}.
+	 * Enter a parse tree produced by {@link JavaLexerParser#variable_def}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariable(JavaLexerParser.VariableContext ctx);
+	void enterVariable_def(JavaLexerParser.Variable_defContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JavaLexerParser#variable}.
+	 * Exit a parse tree produced by {@link JavaLexerParser#variable_def}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariable(JavaLexerParser.VariableContext ctx);
+	void exitVariable_def(JavaLexerParser.Variable_defContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#var_assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_assign(JavaLexerParser.Var_assignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#var_assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_assign(JavaLexerParser.Var_assignContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaLexerParser#attribute}.
 	 * @param ctx the parse tree
@@ -176,6 +196,16 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFor_loop(JavaLexerParser.For_loopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#for_each_loop}.
+	 * @param ctx the parse tree
+	 */
+	void enterFor_each_loop(JavaLexerParser.For_each_loopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#for_each_loop}.
+	 * @param ctx the parse tree
+	 */
+	void exitFor_each_loop(JavaLexerParser.For_each_loopContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaLexerParser#while_loop}.
 	 * @param ctx the parse tree
@@ -227,6 +257,16 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 */
 	void exitInterface_name(JavaLexerParser.Interface_nameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#static_block}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatic_block(JavaLexerParser.Static_blockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#static_block}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatic_block(JavaLexerParser.Static_blockContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaLexerParser#method_name}.
 	 * @param ctx the parse tree
 	 */
@@ -236,4 +276,34 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMethod_name(JavaLexerParser.Method_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#generic_type_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterGeneric_type_name(JavaLexerParser.Generic_type_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#generic_type_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitGeneric_type_name(JavaLexerParser.Generic_type_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#comp_op}.
+	 * @param ctx the parse tree
+	 */
+	void enterComp_op(JavaLexerParser.Comp_opContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#comp_op}.
+	 * @param ctx the parse tree
+	 */
+	void exitComp_op(JavaLexerParser.Comp_opContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#math_op}.
+	 * @param ctx the parse tree
+	 */
+	void enterMath_op(JavaLexerParser.Math_opContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#math_op}.
+	 * @param ctx the parse tree
+	 */
+	void exitMath_op(JavaLexerParser.Math_opContext ctx);
 }

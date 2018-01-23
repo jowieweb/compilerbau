@@ -52,6 +52,12 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMethod_call_param(JavaLexerParser.Method_call_paramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#cast}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCast(JavaLexerParser.CastContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JavaLexerParser#method}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -82,11 +88,17 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIf_cond(JavaLexerParser.If_condContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaLexerParser#variable}.
+	 * Visit a parse tree produced by {@link JavaLexerParser#variable_def}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariable(JavaLexerParser.VariableContext ctx);
+	T visitVariable_def(JavaLexerParser.Variable_defContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#var_assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar_assign(JavaLexerParser.Var_assignContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaLexerParser#attribute}.
 	 * @param ctx the parse tree
@@ -111,6 +123,12 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFor_loop(JavaLexerParser.For_loopContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#for_each_loop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor_each_loop(JavaLexerParser.For_each_loopContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaLexerParser#while_loop}.
 	 * @param ctx the parse tree
@@ -142,9 +160,33 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInterface_name(JavaLexerParser.Interface_nameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#static_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatic_block(JavaLexerParser.Static_blockContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JavaLexerParser#method_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMethod_name(JavaLexerParser.Method_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#generic_type_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGeneric_type_name(JavaLexerParser.Generic_type_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#comp_op}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComp_op(JavaLexerParser.Comp_opContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#math_op}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMath_op(JavaLexerParser.Math_opContext ctx);
 }
