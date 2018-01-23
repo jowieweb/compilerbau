@@ -67,9 +67,9 @@ parameter: datatype (LSQBRACK RSQBRACK)? IDENTIFIER (LSQBRACK RSQBRACK)?;
 //METHODBODY: LCBRACK RBRACK;
 
 constructor : accessmod? STATIC? class_name LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)? LCBRACK scope_body* RCBRACK;
-method_sig : accessmod? (STATIC | ABSTRACT)? (datatype | VOID) method_name LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
+method_sig : accessmod? (STATIC | ABSTRACT)? FINAL? (datatype | VOID) method_name LBRACK (parameter(',' parameter)*)? RBRACK (THROWS IDENTIFIER(',' IDENTIFIER)*)?;
 method_call : (THIS DOT)? (class_name DOT)* method_name (LPBRACK datatype? RPBRACK)? LBRACK (method_call_param(',' method_call_param)*)? RBRACK;
-method_call_param : cast? (NEW? method_call (DOT method_call)* | STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE) (math_op (STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE | (method_call(DOT method_call)*)))* ;
+method_call_param : cast? (NEW? method_call (DOT method_call)* | STRING_CONST | IDENTIFIER (DOT IDENTIFIER)*| Digits | TRUE | FALSE) (math_op (STRING_CONST | IDENTIFIER | Digits | TRUE | FALSE | (method_call(DOT method_call)*)))* ;
 cast : LBRACK IDENTIFIER(DOT IDENTIFIER)* RBRACK;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
@@ -83,14 +83,14 @@ condition : LBRACK* (('!'? (method_call(DOT method_call)* | IDENTIFIER)? comp_op
 if_cond : IF condition scope (ELSE (if_cond | scope))?;
 variable : datatype IDENTIFIER;
 attribute : accessmod? STATIC? FINAL? variable ('=' (NEW? method_call | STRING_CONST | Digits))? SEMICOLON;
-datatype: INTEGER
+datatype: (INTEGER
 		| DOUBLE
 		| FLOAT
 		| STRING
 		| LONG
 		| SHORT
 		| BYTE
-		| IDENTIFIER(DOT IDENTIFIER)* (LPBRACK datatype RPBRACK)?;
+		| IDENTIFIER(DOT IDENTIFIER)* (LPBRACK datatype RPBRACK)?) (LSQBRACK RSQBRACK)?;
 scope_body : if_cond
 		| method_call (DOT method_call)* SEMICOLON
 		| expression SEMICOLON
@@ -101,10 +101,11 @@ scope_body : if_cond
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
 for_each_loop : FOR LBRACK variable ':' (method_call | IDENTIFIER) RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 while_loop : WHILE LBRACK expression? condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
-class_def : accessmod? ABSTRACT? STATIC? FINAL? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (constructor | method | attribute | class_def)* RCBRACK;
+class_def : accessmod? ABSTRACT? STATIC? FINAL? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (static_block | constructor | method | attribute | class_def)* RCBRACK;
 interface_def : accessmod? INTERFACE interface_name  (EXTENDS class_name)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
 class_name : IDENTIFIER generic_type_name?;
 interface_name : IDENTIFIER generic_type_name?;
+static_block : STATIC LCBRACK (attribute | method_call SEMICOLON)* RCBRACK;
 method_name : IDENTIFIER;
 generic_type_name : LPBRACK IDENTIFIER RPBRACK;
 comp_op : '<='
