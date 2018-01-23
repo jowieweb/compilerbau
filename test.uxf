@@ -1,125 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>10</x><y>10</y><w>300</w><h>90</h> </coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
-Ding
+  <zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>10</x><y>10</y><w>300</w><h>75</h> </coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+JavaLexerVisitor
 --
 --
-+machwas()
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>360</x><y>10</y><w>300</w><h>131</h> </coordinates><panel_attributes>Figur
+<element><id>UMLClass</id><coordinates><x>360</x><y>10</y><w>300</w><h>105</h> </coordinates><panel_attributes>LukeTreeListener
 --
 --
-#test(): double
-+test2()
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>180</h> </coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
-Flaeche
+<element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>118</h> </coordinates><panel_attributes>Main
 --
+_- DEFAULT_OUTPUT_FILE: String_
 --
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>1060</x><y>10</y><w>300</w><h>235</h> </coordinates><panel_attributes>Kreis
+<element><id>UMLClass</id><coordinates><x>1060</x><y>10</y><w>300</w><h>495</h> </coordinates><panel_attributes>ClassInfo
 --
-- r: double
+- attributes: ArrayList&lt;Attribute&gt;
+- innerClasses: ArrayList&lt;ClassInfo&gt;
+- interfaces: ArrayList&lt;Interface&gt;
+- implementedInterfaces: ArrayList&lt;String&gt;
+- accessModifier: String
+- staticFlag: boolean
+- abstractFlag: boolean
+- finalFlag: boolean
 --
-+Kreis(r: double)
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+getFlaeche(): double
-+Malte(niklas: ArrayList&lt;Integer&gt;): String
++ClassInfo(className: String, found: boolean)
++getAttributes(): ArrayList&lt;Attribute&gt;
++setAttributes(attributes: ArrayList&lt;Attribute&gt;)
++getInnerClasses(): ArrayList&lt;ClassInfo&gt;
++setInnerClasses(innerClasses: ArrayList&lt;ClassInfo&gt;)
++getInterfaces(): ArrayList&lt;Interface&gt;
++setInterfaces(interfaces: ArrayList&lt;Interface&gt;)
++isStaticFlag(): boolean
++setStaticFlag(staticFlag: boolean)
++isAbstractFlag(): boolean
++setAbstractFlag(abstractFlag: boolean)
++getImplementedInterfaces(): ArrayList&lt;String&gt;
++setImplementedInterfaces(implementedInterfaces: ArrayList&lt;String&gt;)
++getAccessModifier(): String
++setAccessModifier(accessModifier: String)
++isFinalFlag(): boolean
++setFinalFlag(finalFlag: boolean)
++equals(o: Object): boolean
++hashCode(): int
++filterRelations(parsed: ArrayList&lt;GetMethods&gt;)
++toUML(parsed: ArrayList&lt;GetMethods&gt;): String
++getHSize(): int
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>1410</x><y>10</y><w>300</w><h>131</h> </coordinates><panel_attributes>Polymorphie
+<element><id>UMLClass</id><coordinates><x>1410</x><y>10</y><w>300</w><h>209</h> </coordinates><panel_attributes>Interface
 --
+- baseInterface: Interface
 --
-+main(args: String)
-{innerclass
-InnerClass
---
-- kreis: Kreis
---
-+InnerClass()
-
-innerclass}
++Interface(name: String, found: boolean)
++getAttributes(): ArrayList&lt;Attribute&gt;
++getBaseInterface(): Interface
++setBaseInterface(baseInterface: Interface)
++equals(o: Object): boolean
++hashCode(): int
++toUML(parsed: ArrayList&lt;GetMethods&gt;): String
 </panel_attributes><additional_attributes/>
-</element>
-<element><id>UMLClass</id><coordinates><x>1760</x><y>10</y><w>300</w><h>118</h> </coordinates><panel_attributes>Test
---
---
-+test()
-</panel_attributes><additional_attributes/>
-</element>
-
-<element>
-<id>Relation</id>
-<coordinates>
-<x>160</x>
-<y>100</y>
-<w>0</w>
-<h>0</h>
-</coordinates>
-<panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;700.0;90.0;</additional_attributes>
-</element>
-
-<element>
-<id>Relation</id>
-<coordinates>
-<x>860</x>
-<y>190</y>
-<w>0</w>
-<h>0</h>
-</coordinates>
-<panel_attributes>lt=&lt;&lt;.</panel_attributes>
-<additional_attributes>0.0;0.0;350.0;55.0;</additional_attributes>
-</element>
-
-<element>
-<id>Relation</id>
-<coordinates>
-<x>510</x>
-<y>141</y>
-<w>0</w>
-<h>0</h>
-</coordinates>
-<panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;700.0;104.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>1210</x>
-<y>245</y>
+<y>505</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;350.0;-104.0;</additional_attributes>
+<additional_attributes>0.0;0.0;0.0;0.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
-<x>510</x>
-<y>141</y>
+<x>1560</x>
+<y>219</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;1050.0;0.0;</additional_attributes>
+<additional_attributes>0.0;0.0;0.0;0.0;</additional_attributes>
 </element>
 </diagram>

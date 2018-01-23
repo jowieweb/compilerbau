@@ -95,18 +95,14 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 	public void enterAttribute(JavaLexerParser.AttributeContext ctx) {
 		//System.out.println("Attribut: " + ctx.variable().IDENTIFIER().getText());
-		String datatype = ctx.variable_def().datatype().getText();
-		for (TerminalNode ident:  ctx.variable_def().IDENTIFIER()) {
-			Attribute attribute = new Attribute(datatype, ident.getText());
-			if (ctx.accessmod() != null) {
-				attribute.setAccessModifier(ctx.accessmod().getText());
-			}
-			if (ctx.STATIC() != null) {
-				attribute.setStaticFlag(true);
-			}
-			getCurrentScope().getAttributes().add(attribute);
+		Attribute attribute = new Attribute(ctx.variable().datatype().getText(), ctx.variable().IDENTIFIER().getText());
+		if (ctx.accessmod() != null) {
+			attribute.setAccessModifier(ctx.accessmod().getText());
 		}
-
+		if (ctx.STATIC() != null) {
+			attribute.setStaticFlag(true);
+		}
+		getCurrentScope().getAttributes().add(attribute);
 	}
 
 	@Override
@@ -126,7 +122,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 			i.setAccessModifier(ctx.accessmod().getText());
 		}
 		if (ctx.EXTENDS() != null) {
-			i.setParent((GetMethods) new Interface(ctx.class_name().getText(),false));
+			i.setParent((GetMethods) new Interface(ctx.IDENTIFIER().getText(),false));
 		}
 	}
 

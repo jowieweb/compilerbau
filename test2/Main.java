@@ -57,12 +57,7 @@ public class Main extends JavaLexerBaseVisitor {
 					parseFiles(f.listFiles());
 
 				} else {
-					System.out.println(f.getAbsolutePath());
-					try {
-						parse(f.getAbsolutePath());
-					}catch ( Exception e){
-						System.out.println("BÖÖÖÖÖÖSE DATEI: " + f.getAbsolutePath() + "\n" + e.toString());
-					}
+					parse(f.getAbsolutePath());
 					//System.out.println("Datei: " + f.getName());
 				}
 			}
