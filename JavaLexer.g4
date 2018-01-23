@@ -157,7 +157,7 @@ switch_block : SWITCH LBRACK expression RBRACK switch_scope;
 switch_scope : LCBRACK case_block* RCBRACK;
 case_block: (DEFAULT | CASE ((IDENTIFIER DOT)* IDENTIFIER | STRING_CONST | Digits | HexDigits))  ':' scope_body*? (BREAK SEMICOLON)?;
 method_name : IDENTIFIER | STRING;
-generic_type_name : LPBRACK ('?' EXTENDS)? IDENTIFIER (DOT IDENTIFIER)* RPBRACK;
+generic_type_name : LPBRACK ('?' EXTENDS)? (IDENTIFIER | datatype) (DOT IDENTIFIER)* RPBRACK;
 comp_op : '<='
 		| '>='
 		| '<'
