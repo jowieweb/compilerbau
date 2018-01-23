@@ -136,6 +136,12 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile_loop(JavaLexerParser.While_loopContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#do_while_loop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDo_while_loop(JavaLexerParser.Do_while_loopContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JavaLexerParser#class_def}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -165,6 +171,30 @@ public interface JavaLexerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatic_block(JavaLexerParser.Static_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#try_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTry_block(JavaLexerParser.Try_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#switch_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitch_block(JavaLexerParser.Switch_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#switch_scope}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitch_scope(JavaLexerParser.Switch_scopeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaLexerParser#case_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCase_block(JavaLexerParser.Case_blockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaLexerParser#method_name}.
 	 * @param ctx the parse tree
