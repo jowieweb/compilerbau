@@ -267,6 +267,18 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDo_while_loop(JavaLexerParser.Do_while_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDo_while_loop(JavaLexerParser.Do_while_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterClass_def(JavaLexerParser.Class_defContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -322,6 +334,54 @@ public class JavaLexerBaseListener implements JavaLexerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStatic_block(JavaLexerParser.Static_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTry_block(JavaLexerParser.Try_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTry_block(JavaLexerParser.Try_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitch_block(JavaLexerParser.Switch_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_block(JavaLexerParser.Switch_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitch_scope(JavaLexerParser.Switch_scopeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_scope(JavaLexerParser.Switch_scopeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCase_block(JavaLexerParser.Case_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCase_block(JavaLexerParser.Case_blockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

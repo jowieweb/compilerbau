@@ -217,6 +217,16 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 */
 	void exitWhile_loop(JavaLexerParser.While_loopContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#do_while_loop}.
+	 * @param ctx the parse tree
+	 */
+	void enterDo_while_loop(JavaLexerParser.Do_while_loopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#do_while_loop}.
+	 * @param ctx the parse tree
+	 */
+	void exitDo_while_loop(JavaLexerParser.Do_while_loopContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaLexerParser#class_def}.
 	 * @param ctx the parse tree
 	 */
@@ -266,6 +276,46 @@ public interface JavaLexerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStatic_block(JavaLexerParser.Static_blockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#try_block}.
+	 * @param ctx the parse tree
+	 */
+	void enterTry_block(JavaLexerParser.Try_blockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#try_block}.
+	 * @param ctx the parse tree
+	 */
+	void exitTry_block(JavaLexerParser.Try_blockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#switch_block}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitch_block(JavaLexerParser.Switch_blockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#switch_block}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitch_block(JavaLexerParser.Switch_blockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#switch_scope}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitch_scope(JavaLexerParser.Switch_scopeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#switch_scope}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitch_scope(JavaLexerParser.Switch_scopeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaLexerParser#case_block}.
+	 * @param ctx the parse tree
+	 */
+	void enterCase_block(JavaLexerParser.Case_blockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaLexerParser#case_block}.
+	 * @param ctx the parse tree
+	 */
+	void exitCase_block(JavaLexerParser.Case_blockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaLexerParser#method_name}.
 	 * @param ctx the parse tree

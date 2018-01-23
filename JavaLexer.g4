@@ -2,7 +2,6 @@ grammar JavaLexer;
 
 r : (interface_def | class_def)* ;
 
-WS :			[ \t\n\r]		-> skip;
 COMMENT:		'/*' .*? '*/'	-> skip;
 LINE_COMMENT:	'//' ~[\r\n]*	-> skip;
 ANNOTATION:		'@' ~[\r\n]*	-> skip;
@@ -34,12 +33,15 @@ IF : 'if';
 ELSE : 'else';
 NULL : 'null';
 INSTANCEOF : 'instanceof';
+TRY : 'try';
 CATCH : 'catch';
 FINALLY : 'finally';
+
 
 // Loops
 FOR : 'for';
 WHILE : 'while';
+DO : 'do';
 
 // Data types
 INTEGER : 'int';
@@ -60,9 +62,15 @@ LPBRACK : '<';
 RPBRACK : '>';
 SEMICOLON : ';';
 DOT : '.';
+SWITCH : 'switch';
+CASE : 'case';
+DEFAULT : 'default';
+BREAK : 'break';
+THROW :'throw';
 
 IDENTIFIER: '_'* Letter ('_' | LetterOrDigit)*;
 STRING_CONST : '"' (~["\\\r\n] | EscapeSequence)* '"';// '"' (.*? | '\\"') '"';
+WS :			[ \t\n\r]		-> skip;
 fragment EscapeSequence
     : '\\' [btnfr"'\\]
     | '\\' ([0-3]? [0-7])? [0-7]
@@ -72,6 +80,8 @@ fragment EscapeSequence
 fragment HexDigit
     : [0-9a-fA-F]
     ;
+
+HexDigits: '0x' HexDigit+;
 
 
 //CONSTRUCTOR: ACCESSMOD? METHODSIG METHODBODY  ;
@@ -87,17 +97,32 @@ method_call_param : cast? (NEW? method_call (DOT method_call)* | THIS | STRING_C
 cast : LBRACK IDENTIFIER(DOT IDENTIFIER)* generic_type_name? RBRACK;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
-expression : (RETURN? LBRACK*? (THIS DOT)? ((IDENTIFIER DOT)* IDENTIFIER (LSQBRACK IDENTIFIER RSQBRACK) '=')? (STRING_CONST
+expression : (RETURN? LBRACK*? (THIS DOT)? ((IDENTIFIER DOT)* IDENTIFIER (LSQBRACK IDENTIFIER RSQBRACK)? '=')? (STRING_CONST
 							| datatype? (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* ('++' | '--')?
-							| LBRACK* cast? (IDENTIFIER (DOT IDENTIFIER)*)? RBRACK* DOT? NEW? method_call (DOT method_call)*) RBRACK* LBRACK* ((DOT
+							| TRUE
+							| FALSE
+							| LBRACK* cast? THROW? (IDENTIFIER (DOT IDENTIFIER)*)? RBRACK* DOT? NEW? method_call (DOT method_call)*) RBRACK* LBRACK* ((DOT
 								| IDENTIFIER
 								| STRING_CONST
 								| ((math_op | '=' )? (LBRACK IDENTIFIER RBRACK)?) LBRACK* NEW? (method_call (DOT method_call)* math_op? (method_call (DOT method_call)*)?
-								| Digits+))+)?) RBRACK*;
-condition : LBRACK* (('!'? (method_call(DOT method_call)* | IDENTIFIER)? comp_op? '!'? (NULL | Digits | IDENTIFIER (DOT IDENTIFIER)* | (IDENTIFIER DOT)* method_call(DOT (method_call | IDENTIFIER))*)) | TRUE | FALSE) RBRACK? condition?;
+								| Digits+))+)? math_op?)+ RBRACK*;
+condition : (LBRACK*?
+	(
+		('!'? LBRACK*?
+			(method_call(DOT method_call)* | IDENTIFIER | Digits) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
+				(math_op?
+					(NULL | HexDigits | Digits | IDENTIFIER (DOT IDENTIFIER)* | (IDENTIFIER DOT)* method_call(DOT (method_call | IDENTIFIER))* RBRACK*)
+				)*
+			) | TRUE | FALSE
+		) RBRACK*?
+	)+ (comp_op condition)*;
+/*condition: (
+			(LBRACK condition RBRACK)
+			| ((IDENTIFIER DOT)* IDENTIFIER (LSQBRACK (IDENTIFIER DOT)* IDENTIFIER RSQBRACK)? | Digits | HexDigits | method_call(DOT method_call)*) (comp_op | math_op) math_op? ((IDENTIFIER DOT)* IDENTIFIER | Digits | HexDigits | method_call(DOT method_call)*)) comp_op ((IDENTIFIER DOT)* IDENTIFIER | NULL | HexDigits | Digits);
+			*/
 if_cond : IF condition (scope | scope_body) (ELSE (if_cond | scope | scope_body))?;
 variable_def : datatype IDENTIFIER var_assign? (',' IDENTIFIER var_assign?)* ;
-var_assign : '=' LCBRACK? (expression | STRING_CONST | Digits | NULL) (',' (expression | STRING_CONST | Digits | NULL))* RCBRACK?;//(NEW? method_call | STRING_CONST | Digits | NULL) (',' (NEW? method_call | STRING_CONST | Digits | NULL))* RCBRACK?;
+var_assign : '=' LCBRACK? (expression | STRING_CONST | Digits | NULL) (',' (expression | STRING_CONST | HexDigits | Digits | NULL))* RCBRACK?;
 attribute : accessmod? STATIC? FINAL? variable_def SEMICOLON;
 datatype: (INTEGER
 		| DOUBLE
@@ -106,27 +131,33 @@ datatype: (INTEGER
 		| LONG
 		| SHORT
 		| BYTE
-		| generic_type_name
+		| generic_type_name IDENTIFIER?
 		| IDENTIFIER(DOT IDENTIFIER)* generic_type_name?) (LSQBRACK RSQBRACK)?;
 scope_body : if_cond
-		| method_call (DOT method_call)* SEMICOLON
 		| try_block
-		| expression SEMICOLON
+		| switch_block
 		| for_loop
 		| for_each_loop
+		| do_while_loop
 		| while_loop
+		| expression SEMICOLON
+		| method_call (DOT method_call)* SEMICOLON
 		| scope;
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
 for_each_loop : FOR LBRACK variable_def ':' (method_call | IDENTIFIER) RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
-while_loop : WHILE LBRACK expression? condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
+while_loop : WHILE LBRACK condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
+do_while_loop : DO scope WHILE LBRACK condition RBRACK SEMICOLON;
 class_def : accessmod? ABSTRACT? STATIC? FINAL? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (static_block | constructor | method | attribute | class_def)* RCBRACK;
 interface_def : accessmod? INTERFACE interface_name  (EXTENDS class_name)? LCBRACK (method_sig SEMICOLON)* RCBRACK;
 class_name : IDENTIFIER generic_type_name?;
 interface_name : IDENTIFIER generic_type_name?;
 static_block : STATIC LCBRACK (attribute | scope_body)* RCBRACK;
 try_block : TRY scope (CATCH LBRACK datatype ('|' datatype)* IDENTIFIER RBRACK scope)+ (FINALLY scope)? ;
+switch_block : SWITCH LBRACK expression RBRACK switch_scope;
+switch_scope : LCBRACK case_block* RCBRACK;
+case_block: (DEFAULT | CASE ((IDENTIFIER DOT)* IDENTIFIER | STRING_CONST | Digits | HexDigits))  ':' scope_body*? (BREAK SEMICOLON)?;
 method_name : IDENTIFIER | STRING;
-generic_type_name : LPBRACK ('?' EXTENDS)? IDENTIFIER RPBRACK IDENTIFIER?;
+generic_type_name : LPBRACK ('?' EXTENDS)? IDENTIFIER (DOT IDENTIFIER)* RPBRACK;
 comp_op : '<='
 		| '>='
 		| '<'
@@ -135,6 +166,8 @@ comp_op : '<='
 		| '!='
 		| '&'
 		| '|'
+		| '~'
+		| '^'
 		| '&&'
 		| '||'
 		| INSTANCEOF;
