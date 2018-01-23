@@ -1,11 +1,9 @@
 public class Test{
 	public void test(){
-		try{
-			
-		}catch(Exception e){
-			
+		while((((_la)& ~0x3f)== 0 && ((1l << CLASS) | (1l << PUBLIC) | << PRIVATE))){
+			append("<x>" + blubber() +"");
 		}
-		append("<x>" + blubber() +"");
+		
 	}
 	
 }
