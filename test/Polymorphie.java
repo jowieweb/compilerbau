@@ -21,10 +21,9 @@ public class Polymorphie
     }
     System.out.println( "Gesamtflaeche ist: " + flaeche );
 
-	while(int i =new Auto().getDoorCount() < 5);
-
+	while(new Auto().getDoorCount() < 5)
 	{
-		//boolean as = (new Auto().idc()?true:false);
+		boolean as = Auto.DoorCount++;
 	}
 
 	ArrayList<Auto> autos = new ArrayList<>();
