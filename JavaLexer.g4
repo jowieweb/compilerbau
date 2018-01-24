@@ -95,9 +95,10 @@ cast : LBRACK IDENTIFIER(DOT IDENTIFIER)* generic_type_name? RBRACK;
 method : method_sig (LCBRACK scope_body* RCBRACK | SEMICOLON);
 scope : LCBRACK scope_body*? RCBRACK;
 expression : (RETURN? LBRACK*? (THIS DOT)? (datatype? IDENTIFIER (DOT IDENTIFIER)* (LSQBRACK IDENTIFIER RSQBRACK)? '=')? (STRING_CONST
-							| datatype? (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* ('++' | '--')?
+							| datatype? cast? (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* ('++' | '--')?
 							| TRUE
 							| FALSE
+							| NULL
 							| RETURN
 							| LBRACK* cast? THROW? (IDENTIFIER (DOT IDENTIFIER)*)? RBRACK* DOT? NEW? method_call (DOT method_call)*) RBRACK* LBRACK* ((DOT
 								| IDENTIFIER
@@ -107,7 +108,7 @@ expression : (RETURN? LBRACK*? (THIS DOT)? (datatype? IDENTIFIER (DOT IDENTIFIER
 condition : (LBRACK*?
 	(
 		('!'? LBRACK*?
-			(method_call(DOT method_call)* | (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* | Digits) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
+			(method_call(DOT method_call)* | (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* | Digits | HexDigits | NULL | TRUE | FALSE | THIS) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
 				(math_op?
 					(NULL | HexDigits | Digits | IDENTIFIER (DOT IDENTIFIER)* | (IDENTIFIER DOT)* method_call(DOT (method_call | IDENTIFIER (DOT IDENTIFIER)*))* RBRACK*)
 				)*
@@ -139,7 +140,7 @@ scope_body : if_cond
 		| method_call (DOT method_call)* SEMICOLON
 		| scope;
 for_loop : FOR LBRACK expression? SEMICOLON condition SEMICOLON expression RBRACK (LCBRACK scope_body* RCBRACK) | expression SEMICOLON;
-for_each_loop : FOR LBRACK variable_def ':' (method_call (DOT method_call)* | IDENTIFIER (DOT IDENTIFIER)*) RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
+for_each_loop : FOR LBRACK variable_def ':' (method_call (DOT method_call)* | (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)*) RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 while_loop : WHILE LBRACK condition RBRACK (SEMICOLON | LCBRACK scope_body* RCBRACK | expression SEMICOLON);
 do_while_loop : DO scope WHILE LBRACK condition RBRACK SEMICOLON;
 class_def : accessmod? ABSTRACT? STATIC? FINAL? CLASS class_name (EXTENDS class_name)? (IMPLEMENTS interface_name(',' interface_name)*)? LCBRACK (static_block | constructor | method | attribute | class_def)* RCBRACK;
