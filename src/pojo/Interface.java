@@ -66,7 +66,7 @@ public class Interface extends GetMethods {
 		sb.append("<w>" + w + "</w>");
 		sb.append("<h>" + h + "</h> </coordinates>");
 		sb.append("<panel_attributes>");
-		sb.append("&lt;&lt;interface&gt;&gt;\n" + this.name);
+		sb.append("&lt;&lt;interface&gt;&gt;\n" + this.name.replace("<", "&lt;").replace(">", "&gt;"));
 		sb.append("\n--\n");
 
 		sb.append("--\n");

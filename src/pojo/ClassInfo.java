@@ -181,7 +181,7 @@ public class ClassInfo extends GetMethods {
 
 		if(abstractFlag)
 			sb.append("/");
-		sb.append(this.name );
+		sb.append(this.name.replace("<", "&lt;").replace(">", "&gt;") );
 		if(abstractFlag)
 			sb.append("/");
 		sb.append("\n--\n");

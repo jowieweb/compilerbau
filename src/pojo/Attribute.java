@@ -50,7 +50,7 @@ public class Attribute {
 			sb.append("_");
 		}
 		sb.append(accessModifier.replace("private", "-").replace("public", "+").replace("protected", "#") + " ");
-		sb.append(name + ": " + dataType.replace("<", "&lt;").replace(">", "&gt;"));
+		sb.append(name.replace("<", "&lt;").replace(">", "&gt;") + ": " + dataType.replace("<", "&lt;").replace(">", "&gt;"));
 		if(staticFlag){
 			sb.append("_");
 		}

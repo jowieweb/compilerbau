@@ -92,7 +92,7 @@ public class Method {
 			sb.append("/");
 
 		sb.append(accessModifier.replace("private", "-").replace("public", "+").replace("protected", "#"));
-		sb.append(methodName + "(");
+		sb.append(methodName.replace("<", "&lt;").replace(">", "&gt;") + "(");
 		for (Parameter p:parameters ) {
 			sb.append(p.toString() + ", ");
 		}

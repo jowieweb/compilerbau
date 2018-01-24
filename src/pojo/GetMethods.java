@@ -96,5 +96,13 @@ public abstract class GetMethods {
 		this.parent = parent;
 	}
 
+	public String toString(){
+		if(name != null)
+			if(name.length() > 0)
+				return  name;
+
+		return  "komische klasse";
+	}
+
 
 }

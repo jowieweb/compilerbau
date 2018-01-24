@@ -23,7 +23,7 @@ public class Parameter {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(name + ": " + dataType);
+		sb.append(name.replace("<", "&lt;").replace(">", "&gt;") + ": " + dataType.replace("<", "&lt;").replace(">", "&gt;"));
 		return sb.toString();
 	}
 }
