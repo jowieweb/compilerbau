@@ -77,6 +77,8 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		} else  {
 			method.setReturnType("");
 		}
+		if(ctx.ABSTRACT() != null)
+		    method.setAbstractFlag(true);
 		getCurrentScope().getMethods().add(method);
 	}
 

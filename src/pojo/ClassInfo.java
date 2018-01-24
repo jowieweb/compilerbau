@@ -194,8 +194,7 @@ public class ClassInfo extends GetMethods {
 			sb.append(mt.toString() + "\n");
 		}
 
-		if(abstractFlag)
-			sb.append("/");
+
 
 		if(children.size() > 0)
 		{

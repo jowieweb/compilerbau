@@ -7,11 +7,12 @@ Ding
 +machwas()
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>360</x><y>10</y><w>300</w><h>135</h> </coordinates><panel_attributes>Figur
+<element><id>UMLClass</id><coordinates><x>360</x><y>10</y><w>300</w><h>150</h> </coordinates><panel_attributes>/Figur/
 --
 --
 #test(): double
 +test2()
+/+test3()/
 </panel_attributes><additional_attributes/>
 </element>
 <element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>180</h> </coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
@@ -27,7 +28,7 @@ Flaeche
 +getFlaeche(): double
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>1060</x><y>10</y><w>300</w><h>255</h> </coordinates><panel_attributes>Kreis
+<element><id>UMLClass</id><coordinates><x>1060</x><y>10</y><w>300</w><h>270</h> </coordinates><panel_attributes>Kreis
 --
 - r: double
 --
@@ -40,6 +41,7 @@ Flaeche
 +getFlaeche(): double
 +getFlaeche(): double
 +Malte(niklas: ArrayList&lt;Integer&gt;): String
++test3()
 </panel_attributes><additional_attributes/>
 </element>
 <element><id>UMLClass</id><coordinates><x>1410</x><y>10</y><w>300</w><h>135</h> </coordinates><panel_attributes>Polymorphie
@@ -85,14 +87,14 @@ innerclass}
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-<additional_attributes>0.0;0.0;350.0;75.0;</additional_attributes>
+<additional_attributes>0.0;0.0;350.0;90.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>510</x>
-<y>145</y>
+<y>160</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
@@ -104,23 +106,23 @@ innerclass}
 <id>Relation</id>
 <coordinates>
 <x>1210</x>
-<y>265</y>
+<y>280</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;350.0;-120.0;</additional_attributes>
+<additional_attributes>0.0;0.0;350.0;-135.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>510</x>
-<y>145</y>
+<y>160</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;1050.0;0.0;</additional_attributes>
+<additional_attributes>0.0;0.0;1050.0;-15.0;</additional_attributes>
 </element>
 </diagram>

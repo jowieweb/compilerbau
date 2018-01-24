@@ -32,4 +32,7 @@ class Kreis extends Figur implements Flaeche {
 	String bjoern;
 	return "Hallo";
   }
+  public void test3(){
+	  
+  }
 }
