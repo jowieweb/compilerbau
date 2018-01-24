@@ -108,7 +108,7 @@ expression : (RETURN? LBRACK*? (THIS DOT)? (datatype? IDENTIFIER (DOT IDENTIFIER
 condition : (LBRACK*?
 	(
 		('!'? LBRACK*?
-			(method_call(DOT method_call)* | (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* | Digits | HexDigits | NULL | TRUE | FALSE | THIS) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
+			(datatype? IDENTIFIER? '='? NEW? method_call(DOT method_call)* | (THIS DOT)? IDENTIFIER (DOT IDENTIFIER)* | Digits | HexDigits | NULL | TRUE | FALSE | THIS) RBRACK*? comp_op? LBRACK* '!'? LBRACK* math_op?
 				(math_op?
 					(NULL | HexDigits | Digits | IDENTIFIER (DOT IDENTIFIER)* | (IDENTIFIER DOT)* method_call(DOT (method_call | IDENTIFIER (DOT IDENTIFIER)*))* RBRACK*)
 				)*
