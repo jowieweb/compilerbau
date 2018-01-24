@@ -215,8 +215,10 @@ public class ClassInfo extends GetMethods {
 	public  int getHSize(){
 		int size = 30;
 		for (ClassInfo ci:innerClasses) {
-			size+= ci.getHSize();
+			size+= (ci.getHSize());
 		}
-		return (13 * (methods.size() + attributes.size() + children.size()) + size);
+		if(innerClasses.size()>1)
+			size*=innerClasses.size();
+		return (15 * (methods.size() + attributes.size() + children.size()) + size);
 	}
 }
