@@ -10,7 +10,7 @@
 --
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>378</h> </coordinates><panel_attributes>JavaLexerLexer
+<element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>420</h> </coordinates><panel_attributes>JavaLexerLexer
 --
 _# _decisionToDFA: DFA[]_
 _# _sharedContextCache: PredictionContextCache_
@@ -112,7 +112,7 @@ enterMath_op(ctx: JavaLexerParser.Math_opContext)
 exitMath_op(ctx: JavaLexerParser.Math_opContext)
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>1410</x><y>10</y><w>300</w><h>1249</h> </coordinates><panel_attributes>JavaLexerParser
+<element><id>UMLClass</id><coordinates><x>1410</x><y>10</y><w>300</w><h>1425</h> </coordinates><panel_attributes>JavaLexerParser
 --
 _# _decisionToDFA: DFA[]_
 _# _sharedContextCache: PredictionContextCache_
@@ -917,7 +917,7 @@ visitComp_op(ctx: JavaLexerParser.Comp_opContext): T
 visitMath_op(ctx: JavaLexerParser.Math_opContext): T
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>2110</x><y>10</y><w>300</w><h>365</h> </coordinates><panel_attributes>LukeTreeListener
+<element><id>UMLClass</id><coordinates><x>2110</x><y>10</y><w>300</w><h>405</h> </coordinates><panel_attributes>LukeTreeListener
 --
 - classInfos: ArrayList&lt;GetMethods&gt;
 - classInfoStack: Stack&lt;GetMethods&gt;
@@ -942,7 +942,7 @@ visitMath_op(ctx: JavaLexerParser.Math_opContext): T
 +clearStack()
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>2460</x><y>10</y><w>300</w><h>196</h> </coordinates><panel_attributes>LukeTreeWalker
+<element><id>UMLClass</id><coordinates><x>2460</x><y>10</y><w>300</w><h>210</h> </coordinates><panel_attributes>LukeTreeWalker
 --
 - classInfo: ArrayList&lt;ClassInfo&gt;
 - currentClass: ClassInfo
@@ -954,7 +954,7 @@ visitMath_op(ctx: JavaLexerParser.Math_opContext): T
 -getParameterListFromParameterContext(paramList: List&lt;JavaLexerParser.ParameterContext&gt;): ArrayList&lt;Parameter&gt;
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>2810</x><y>10</y><w>300</w><h>300</h> </coordinates><panel_attributes>Main
+<element><id>UMLClass</id><coordinates><x>2810</x><y>10</y><w>300</w><h>330</h> </coordinates><panel_attributes>Main
 --
 _- DEFAULT_OUTPUT_FILE: String_
 - luke: LukeTreeListener
@@ -974,7 +974,7 @@ _- DEFAULT_OUTPUT_FILE: String_
 -getFooter(): String
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>3160</x><y>10</y><w>300</w><h>287</h> </coordinates><panel_attributes>Attribute
+<element><id>UMLClass</id><coordinates><x>3160</x><y>10</y><w>300</w><h>315</h> </coordinates><panel_attributes>Attribute
 --
 - accessModifier: String
 - staticFlag: boolean
@@ -993,7 +993,7 @@ _- DEFAULT_OUTPUT_FILE: String_
 +toString(): String
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>3510</x><y>10</y><w>300</w><h>495</h> </coordinates><panel_attributes>ClassInfo
+<element><id>UMLClass</id><coordinates><x>3510</x><y>10</y><w>300</w><h>555</h> </coordinates><panel_attributes>ClassInfo
 --
 - attributes: ArrayList&lt;Attribute&gt;
 - innerClasses: ArrayList&lt;ClassInfo&gt;
@@ -1028,7 +1028,7 @@ _- DEFAULT_OUTPUT_FILE: String_
 +getHSize(): int
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>3860</x><y>10</y><w>300</w><h>560</h> </coordinates><panel_attributes>/GetMethods/
+<element><id>UMLClass</id><coordinates><x>3860</x><y>10</y><w>300</w><h>630</h> </coordinates><panel_attributes>/GetMethods/
 --
 _+ classCount: int_
 # methods: ArrayList&lt;Method&gt;
@@ -1068,7 +1068,7 @@ _+ classCount: int_
 +toString(): String
 /</panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>4210</x><y>10</y><w>300</w><h>209</h> </coordinates><panel_attributes>Interface
+<element><id>UMLClass</id><coordinates><x>4210</x><y>10</y><w>300</w><h>225</h> </coordinates><panel_attributes>Interface
 --
 - baseInterface: Interface
 --
@@ -1081,7 +1081,7 @@ _+ classCount: int_
 +toUML(parsed: ArrayList&lt;GetMethods&gt;): String
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>4560</x><y>10</y><w>300</w><h>443</h> </coordinates><panel_attributes>Method
+<element><id>UMLClass</id><coordinates><x>4560</x><y>10</y><w>300</w><h>495</h> </coordinates><panel_attributes>Method
 --
 - accessModifier: String
 - staticFlag: boolean
@@ -1112,7 +1112,7 @@ _+ classCount: int_
 +toString(): String
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>4910</x><y>10</y><w>300</w><h>196</h> </coordinates><panel_attributes>Parameter
+<element><id>UMLClass</id><coordinates><x>4910</x><y>10</y><w>300</w><h>210</h> </coordinates><panel_attributes>Parameter
 --
 - dataType: String
 - name: String
@@ -1153,72 +1153,72 @@ _+ classCount: int_
 <id>Relation</id>
 <coordinates>
 <x>3310</x>
-<y>297</y>
+<y>325</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-1050.0;78.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-1050.0;90.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>4010</x>
-<y>570</y>
+<y>640</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-1750.0;-195.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-1750.0;-225.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>5060</x>
-<y>206</y>
+<y>220</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-2800.0;169.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-2800.0;195.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>4710</x>
-<y>453</y>
+<y>505</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-2450.0;-78.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-2450.0;-90.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>3660</x>
-<y>505</y>
+<y>565</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-1400.0;-130.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-1400.0;-150.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>4360</x>
-<y>219</y>
+<y>235</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-2100.0;156.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-2100.0;180.0;</additional_attributes>
 </element>
 
 <element>
@@ -1230,14 +1230,14 @@ _+ classCount: int_
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;2100.0;260.0;</additional_attributes>
+<additional_attributes>0.0;0.0;2100.0;300.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>5060</x>
-<y>206</y>
+<y>220</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
@@ -1249,31 +1249,31 @@ _+ classCount: int_
 <id>Relation</id>
 <coordinates>
 <x>4710</x>
-<y>453</y>
+<y>505</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-2100.0;-247.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-2100.0;-285.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>1560</x>
-<y>1259</y>
+<y>1435</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;1400.0;-949.0;</additional_attributes>
+<additional_attributes>0.0;0.0;1400.0;-1095.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>2960</x>
-<y>310</y>
+<y>340</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
@@ -1285,7 +1285,7 @@ _+ classCount: int_
 <id>Relation</id>
 <coordinates>
 <x>3660</x>
-<y>505</y>
+<y>565</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
@@ -1297,19 +1297,19 @@ _+ classCount: int_
 <id>Relation</id>
 <coordinates>
 <x>4010</x>
-<y>570</y>
+<y>640</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;-350.0;-65.0;</additional_attributes>
+<additional_attributes>0.0;0.0;-350.0;-75.0;</additional_attributes>
 </element>
 
 <element>
 <id>Relation</id>
 <coordinates>
 <x>4360</x>
-<y>219</y>
+<y>235</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
@@ -1321,11 +1321,11 @@ _+ classCount: int_
 <id>Relation</id>
 <coordinates>
 <x>4010</x>
-<y>570</y>
+<y>640</y>
 <w>0</w>
 <h>0</h>
 </coordinates>
 <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-<additional_attributes>0.0;0.0;350.0;-351.0;</additional_attributes>
+<additional_attributes>0.0;0.0;350.0;-405.0;</additional_attributes>
 </element>
 </diagram>
