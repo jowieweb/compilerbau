@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -21,6 +22,9 @@ public class Main extends JavaLexerBaseVisitor {
 
 	@Parameter(names={"-h", "--help"}, help = true)
 	private boolean help;
+
+	@Parameter(names={"-s", "--show"}, description="Open UMLet after creating diagram.")
+	private boolean openUmlet = false;
 
 	@Parameter(names="-u", description="Path to umlet jar")
 	private String umletJarpath = "";
@@ -104,7 +108,35 @@ public class Main extends JavaLexerBaseVisitor {
 		// Convert file with UMLet if requested
 		convertWithUMLet();
 
-		System.out.println(sb.toString());
+		if (this.openUmlet) {
+			startUMLet();
+		}
+
+		//System.out.println(sb.toString());
+	}
+
+	private void startUMLet() {
+		if (this.umletJarpath == null || this.umletJarpath.isEmpty()) {
+			System.out.println("Path to UMLet .jar not specified. UMLet will not be started.");
+
+		} else {
+			try {
+				String uxfFile = new File(this.outputFileName).getAbsolutePath();
+				String exec = "java -jar " + this.umletJarpath + " -filename=" + uxfFile + "";
+				ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", getAbsoluteUMLetPath(),
+						"-filename=" + uxfFile).redirectError(ProcessBuilder.Redirect.INHERIT);
+
+				System.out.println("Starting UMLet...");
+
+				Process process = processBuilder.start();
+
+			} catch (FileNotFoundException e) {
+				System.out.println("Could not locate UMLet: " + e.getMessage());
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void convertWithUMLet() {
@@ -117,7 +149,7 @@ public class Main extends JavaLexerBaseVisitor {
 
 			try {
 				String uxfFile = new File(this.outputFileName).getAbsolutePath();
-				ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", this.umletJarpath,
+				ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", getAbsoluteUMLetPath(),
 						"-action=convert", "-format=" + this.exportFormat,
 						"-filename=" + uxfFile).redirectError(ProcessBuilder.Redirect.INHERIT);
 
@@ -127,11 +159,30 @@ public class Main extends JavaLexerBaseVisitor {
 				int status = process.waitFor();
 				System.out.println("Umlet exited with status " + status);
 
+			} catch (FileNotFoundException e) {
+				System.out.println("Could not locate UMLet: " + e.getMessage());
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	private String getAbsoluteUMLetPath() throws FileNotFoundException {
+		File umlet;
+		if (this.umletJarpath.endsWith("umlet.jar")) {
+			umlet = new File(this.umletJarpath);
+		} else {
+			umlet = new File(this.umletJarpath+"/umlet.jar");
+		}
+
+		if (umlet.exists()) {
+			return umlet.getAbsolutePath();
+
+		} else {
+			throw new FileNotFoundException("umlet.jar not found");
 		}
 	}
 
