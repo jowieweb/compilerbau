@@ -57,7 +57,14 @@ public class Main extends JavaLexerBaseVisitor {
 					parseFiles(f.listFiles());
 
 				} else {
-					parse(f.getAbsolutePath());
+					System.out.println(f.getAbsolutePath());
+					try {
+						if(f.getAbsolutePath().endsWith(".java"))
+							parse(f.getAbsolutePath());
+					}catch ( Exception e){
+						System.out.println("BÖÖÖÖÖÖSE DATEI: " + f.getAbsolutePath() + "\n" + e.toString());
+						e.printStackTrace();
+					}
 					//System.out.println("Datei: " + f.getName());
 				}
 			}
@@ -91,6 +98,7 @@ public class Main extends JavaLexerBaseVisitor {
 
 		} catch (IOException e) {
 			System.out.println("Error saving file: " + e.getMessage());
+
 		}
 
 		// Convert file with UMLet if requested

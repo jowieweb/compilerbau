@@ -182,6 +182,8 @@ public class ClassInfo extends GetMethods {
 		if(abstractFlag)
 			sb.append("/");
 		sb.append(this.name );
+		if(abstractFlag)
+			sb.append("/");
 		sb.append("\n--\n");
 		for(Attribute at: this.attributes){
 			sb.append(at.toString() + "\n");

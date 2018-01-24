@@ -174,7 +174,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 			sb.append(ci.toUML(classInfos));
 			sb.append("\n");
 		}
-		sb.append(getRelations());
+		//sb.append(getRelations());
 
 		return  sb.toString();
 	}

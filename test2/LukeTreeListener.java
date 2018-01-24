@@ -14,7 +14,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 	@Override
 	public void enterClass_def(JavaLexerParser.Class_defContext ctx) {
-		if(ctx.class_name().size() <= 1)
+		if(ctx.class_name().size() <= 0)
 			return;
 
 		ClassInfo ci = new ClassInfo(ctx.class_name(0).getText(),true);
@@ -85,24 +85,39 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 
 		if (ctx.IDENTIFIER() != null) {
 			for (TerminalNode id : ctx.IDENTIFIER()) {
-				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(id.getText());
+				List<Method> methods = getCurrentScope().getMethods();
+				if(methods != null)
+					if(methods.size() != 0){
+						getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(id.getText());
+					}
 			}
-			if(ctx.datatype() != null){
-				getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(ctx.datatype().getText());
+			if(ctx.datatype().size() > 0) {
+				List<Method> methods = getCurrentScope().getMethods();
+				if (methods != null) {
+					if (methods.size() != 0) {
+						getCurrentScope().getMethods().get(getCurrentScope().getMethods().size() - 1).getIdentifiers().add(ctx.datatype(0).getText());
+					}
+
+				}
 			}
+
 		}
 	}
 
 	public void enterAttribute(JavaLexerParser.AttributeContext ctx) {
 		//System.out.println("Attribut: " + ctx.variable().IDENTIFIER().getText());
-		Attribute attribute = new Attribute(ctx.variable().datatype().getText(), ctx.variable().IDENTIFIER().getText());
-		if (ctx.accessmod() != null) {
-			attribute.setAccessModifier(ctx.accessmod().getText());
+		String datatype = ctx.variable_def().datatype().getText();
+		for (TerminalNode ident:  ctx.variable_def().IDENTIFIER()) {
+			Attribute attribute = new Attribute(datatype, ident.getText());
+			if (ctx.accessmod() != null) {
+				attribute.setAccessModifier(ctx.accessmod().getText());
+			}
+			if (ctx.STATIC() != null) {
+				attribute.setStaticFlag(true);
+			}
+			getCurrentScope().getAttributes().add(attribute);
 		}
-		if (ctx.STATIC() != null) {
-			attribute.setStaticFlag(true);
-		}
-		getCurrentScope().getAttributes().add(attribute);
+
 	}
 
 	@Override
@@ -122,7 +137,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 			i.setAccessModifier(ctx.accessmod().getText());
 		}
 		if (ctx.EXTENDS() != null) {
-			i.setParent((GetMethods) new Interface(ctx.IDENTIFIER().getText(),false));
+			i.setParent((GetMethods) new Interface(ctx.class_name().getText(),false));
 		}
 	}
 
@@ -141,7 +156,7 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 		for(JavaLexerParser.ParameterContext pc: paramList){
 			Parameter p = new Parameter();
 			p.setDataType(pc.datatype().getText());
-			p.setName(pc.IDENTIFIER().getText());
+			p.setName(pc.IDENTIFIER(0).getText());
 			parameters.add(p);
 		}
 

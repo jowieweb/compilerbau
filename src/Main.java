@@ -59,7 +59,8 @@ public class Main extends JavaLexerBaseVisitor {
 				} else {
 					System.out.println(f.getAbsolutePath());
 					try {
-						parse(f.getAbsolutePath());
+						if(f.getAbsolutePath().endsWith(".java"))
+							parse(f.getAbsolutePath());
 					}catch ( Exception e){
 						System.out.println("BÖÖÖÖÖÖSE DATEI: " + f.getAbsolutePath() + "\n" + e.toString());
 						e.printStackTrace();
