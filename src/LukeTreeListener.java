@@ -164,17 +164,24 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	}
 
 	public String getClasses(){
+		ArrayList<GetMethods> kgw = new ArrayList<>();
+		for (GetMethods ci:classInfos ) {
+			if(ci.getParentForInnerClass() != null){
+				kgw.add(ci);
+			}
+		}
+		for (GetMethods ci:kgw) {
+			classInfos.remove(ci);
+		}
+
 		StringBuilder sb = new StringBuilder();
 
 		for (GetMethods ci:classInfos ) {
-			if(ci.getParentForInnerClass() != null){
-				// dont draw inner classes double
-				continue;
-			}
+
 			sb.append(ci.toUML(classInfos));
 			sb.append("\n");
 		}
-		//sb.append(getRelations());
+		sb.append(getRelations());
 
 		return  sb.toString();
 	}
@@ -193,11 +200,12 @@ public class LukeTreeListener extends JavaLexerBaseListener {
 	}
 
 	private int getAX(GetMethods cl, GetMethods re){
-		if(cl.getX() > re.getX()) {
+		/*if(cl.getX() > re.getX()) {
 			return cl.getX() - re.getX();
 		}
 
-		return  re.getX() - cl.getX();
+		return  re.getX() - cl.getX();*/
+		return cl.getX() - re.getX();
 	}
 
 	public void drawRelation(StringBuilder sb,GetMethods cl, GetMethods relation, String type, int yoffset){

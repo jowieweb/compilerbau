@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>10</x><y>10</y><w>300</w><h>105</h> </coordinates><panel_attributes>JavaLexerBaseListener
+--
+--
+</panel_attributes><additional_attributes/>
+</element>
+<element><id>UMLClass</id><coordinates><x>360</x><y>10</y><w>300</w><h>105</h> </coordinates><panel_attributes>JavaLexerBaseVisitor&lt;T&gt;
+--
+--
+</panel_attributes><additional_attributes/>
+</element>
 <element><id>UMLClass</id><coordinates><x>710</x><y>10</y><w>300</w><h>378</h> </coordinates><panel_attributes>JavaLexerLexer
 --
 _# _decisionToDFA: DFA[]_
@@ -103,8 +112,772 @@ enterMath_op(ctx: JavaLexerParser.Math_opContext)
 exitMath_op(ctx: JavaLexerParser.Math_opContext)
 </panel_attributes><additional_attributes/>
 </element>
+<element><id>UMLClass</id><coordinates><x>1410</x><y>10</y><w>300</w><h>1249</h> </coordinates><panel_attributes>JavaLexerParser
+--
+_# _decisionToDFA: DFA[]_
+_# _sharedContextCache: PredictionContextCache_
+_+ T__0: int_
+_+ RULE_r: int_
+_+ ruleNames: String[]_
+_- _LITERAL_NAMES: String[]_
+_- _SYMBOLIC_NAMES: String[]_
+_+ VOCABULARY: Vocabulary_
+_+ tokenNames: String[]_
+_+ _serializedATN: String_
+_+ _ATN: ATN_
+--
++getTokenNames(): String[]
++getVocabulary(): Vocabulary
++getGrammarFileName(): String
++getRuleNames(): String[]
++getSerializedATN(): String
++getATN(): ATN
++JavaLexerParser(input: TokenStream)
++r(): RContext
++accessmod(): AccessmodContext
++parameter(): ParameterContext
++constructor(): ConstructorContext
++method_sig(): Method_sigContext
++method_call(): Method_callContext
++method_call_param(): Method_call_paramContext
++cast(): CastContext
++method(): MethodContext
++scope(): ScopeContext
++expression(): ExpressionContext
++condition(): ConditionContext
++if_cond(): If_condContext
++variable_def(): Variable_defContext
++var_assign(): Var_assignContext
++attribute(): AttributeContext
++datatype(): DatatypeContext
++scope_body(): Scope_bodyContext
++for_loop(): For_loopContext
++for_each_loop(): For_each_loopContext
++while_loop(): While_loopContext
++do_while_loop(): Do_while_loopContext
++class_def(): Class_defContext
++interface_def(): Interface_defContext
++class_name(): Class_nameContext
++interface_name(): Interface_nameContext
++static_block(): Static_blockContext
++try_block(): Try_blockContext
++switch_block(): Switch_blockContext
++switch_scope(): Switch_scopeContext
++case_block(): Case_blockContext
++method_name(): Method_nameContext
++generic_type_name(): Generic_type_nameContext
++comp_op(): Comp_opContext
++math_op(): Math_opContext
+{innerclass
+RContext
+--
+--
++EOF(): TerminalNode
++interface_def(): List&lt;Interface_defContext&gt;
++interface_def(i: int): Interface_defContext
++class_def(): List&lt;Class_defContext&gt;
++class_def(i: int): Class_defContext
++RContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+AccessmodContext
+--
+--
++PUBLIC(): TerminalNode
++PRIVATE(): TerminalNode
++PROTECTED(): TerminalNode
++AccessmodContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+ParameterContext
+--
+--
++datatype(): DatatypeContext
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++LSQBRACK(): List&lt;TerminalNode&gt;
++LSQBRACK(i: int): TerminalNode
++RSQBRACK(): List&lt;TerminalNode&gt;
++RSQBRACK(i: int): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++ParameterContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+ConstructorContext
+--
+--
++class_name(): Class_nameContext
++LBRACK(): TerminalNode
++RBRACK(): TerminalNode
++scope(): ScopeContext
++accessmod(): AccessmodContext
++STATIC(): TerminalNode
++parameter(): List&lt;ParameterContext&gt;
++parameter(i: int): ParameterContext
++THROWS(): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++ConstructorContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Method_sigContext
+--
+--
++method_name(): Method_nameContext
++LBRACK(): TerminalNode
++RBRACK(): TerminalNode
++datatype(): DatatypeContext
++VOID(): TerminalNode
++accessmod(): AccessmodContext
++FINAL(): TerminalNode
++THROWS(): List&lt;TerminalNode&gt;
++THROWS(i: int): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++parameter(): List&lt;ParameterContext&gt;
++parameter(i: int): ParameterContext
++STATIC(): TerminalNode
++ABSTRACT(): TerminalNode
++Method_sigContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Method_callContext
+--
+--
++method_name(): Method_nameContext
++LBRACK(): TerminalNode
++LSQBRACK(): TerminalNode
++RBRACK(): TerminalNode
++RSQBRACK(): TerminalNode
++THIS(): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++class_name(): List&lt;Class_nameContext&gt;
++class_name(i: int): Class_nameContext
++LPBRACK(): TerminalNode
++RPBRACK(): TerminalNode
++method_call_param(): List&lt;Method_call_paramContext&gt;
++method_call_param(i: int): Method_call_paramContext
++datatype(): DatatypeContext
++Method_callContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Method_call_paramContext
+--
+--
++method_call(): List&lt;Method_callContext&gt;
++method_call(i: int): Method_callContext
++THIS(): List&lt;TerminalNode&gt;
++THIS(i: int): TerminalNode
++STRING_CONST(): List&lt;TerminalNode&gt;
++STRING_CONST(i: int): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++Digits(): List&lt;TerminalNode&gt;
++Digits(i: int): TerminalNode
++TRUE(): List&lt;TerminalNode&gt;
++TRUE(i: int): TerminalNode
++FALSE(): List&lt;TerminalNode&gt;
++FALSE(i: int): TerminalNode
++cast(): CastContext
++math_op(): List&lt;Math_opContext&gt;
++math_op(i: int): Math_opContext
++NEW(): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++CLASS(): TerminalNode
++Method_call_paramContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+CastContext
+--
+--
++LBRACK(): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++RBRACK(): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++generic_type_name(): Generic_type_nameContext
++CastContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+MethodContext
+--
+--
++method_sig(): Method_sigContext
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++SEMICOLON(): TerminalNode
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++MethodContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+ScopeContext
+--
+--
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++ScopeContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+ExpressionContext
+--
+--
++RBRACK(): List&lt;TerminalNode&gt;
++RBRACK(i: int): TerminalNode
++STRING_CONST(): List&lt;TerminalNode&gt;
++STRING_CONST(i: int): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++TRUE(): List&lt;TerminalNode&gt;
++TRUE(i: int): TerminalNode
++FALSE(): List&lt;TerminalNode&gt;
++FALSE(i: int): TerminalNode
++NULL(): List&lt;TerminalNode&gt;
++NULL(i: int): TerminalNode
++RETURN(): List&lt;TerminalNode&gt;
++RETURN(i: int): TerminalNode
++method_call(): List&lt;Method_callContext&gt;
++method_call(i: int): Method_callContext
++LBRACK(): List&lt;TerminalNode&gt;
++LBRACK(i: int): TerminalNode
++THIS(): List&lt;TerminalNode&gt;
++THIS(i: int): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++math_op(): List&lt;Math_opContext&gt;
++math_op(i: int): Math_opContext
++datatype(): List&lt;DatatypeContext&gt;
++datatype(i: int): DatatypeContext
++cast(): List&lt;CastContext&gt;
++cast(i: int): CastContext
++THROW(): List&lt;TerminalNode&gt;
++THROW(i: int): TerminalNode
++NEW(): List&lt;TerminalNode&gt;
++NEW(i: int): TerminalNode
++LSQBRACK(): List&lt;TerminalNode&gt;
++LSQBRACK(i: int): TerminalNode
++RSQBRACK(): List&lt;TerminalNode&gt;
++RSQBRACK(i: int): TerminalNode
++Digits(): List&lt;TerminalNode&gt;
++Digits(i: int): TerminalNode
++ExpressionContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+ConditionContext
+--
+--
++RBRACK(): List&lt;TerminalNode&gt;
++RBRACK(i: int): TerminalNode
++TRUE(): List&lt;TerminalNode&gt;
++TRUE(i: int): TerminalNode
++FALSE(): List&lt;TerminalNode&gt;
++FALSE(i: int): TerminalNode
++LBRACK(): List&lt;TerminalNode&gt;
++LBRACK(i: int): TerminalNode
++comp_op(): List&lt;Comp_opContext&gt;
++comp_op(i: int): Comp_opContext
++method_call(): List&lt;Method_callContext&gt;
++method_call(i: int): Method_callContext
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++Digits(): List&lt;TerminalNode&gt;
++Digits(i: int): TerminalNode
++HexDigits(): List&lt;TerminalNode&gt;
++HexDigits(i: int): TerminalNode
++NULL(): List&lt;TerminalNode&gt;
++NULL(i: int): TerminalNode
++THIS(): List&lt;TerminalNode&gt;
++THIS(i: int): TerminalNode
++math_op(): List&lt;Math_opContext&gt;
++math_op(i: int): Math_opContext
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++ConditionContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+If_condContext
+--
+--
++IF(): TerminalNode
++condition(): ConditionContext
++scope(): List&lt;ScopeContext&gt;
++scope(i: int): ScopeContext
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++ELSE(): TerminalNode
++if_cond(): If_condContext
++If_condContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Variable_defContext
+--
+--
++datatype(): DatatypeContext
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++var_assign(): List&lt;Var_assignContext&gt;
++var_assign(i: int): Var_assignContext
++Variable_defContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Var_assignContext
+--
+--
++expression(): List&lt;ExpressionContext&gt;
++expression(i: int): ExpressionContext
++STRING_CONST(): List&lt;TerminalNode&gt;
++STRING_CONST(i: int): TerminalNode
++Digits(): List&lt;TerminalNode&gt;
++Digits(i: int): TerminalNode
++NULL(): List&lt;TerminalNode&gt;
++NULL(i: int): TerminalNode
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++HexDigits(): List&lt;TerminalNode&gt;
++HexDigits(i: int): TerminalNode
++Var_assignContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+AttributeContext
+--
+--
++variable_def(): Variable_defContext
++SEMICOLON(): TerminalNode
++accessmod(): AccessmodContext
++STATIC(): TerminalNode
++FINAL(): TerminalNode
++AttributeContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+DatatypeContext
+--
+--
++INTEGER(): TerminalNode
++DOUBLE(): TerminalNode
++FLOAT(): TerminalNode
++STRING(): TerminalNode
++LONG(): TerminalNode
++SHORT(): TerminalNode
++BYTE(): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++generic_type_name(): Generic_type_nameContext
++LSQBRACK(): TerminalNode
++RSQBRACK(): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++DatatypeContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Scope_bodyContext
+--
+--
++if_cond(): If_condContext
++try_block(): Try_blockContext
++switch_block(): Switch_blockContext
++expression(): ExpressionContext
++SEMICOLON(): TerminalNode
++for_loop(): For_loopContext
++for_each_loop(): For_each_loopContext
++do_while_loop(): Do_while_loopContext
++while_loop(): While_loopContext
++method_call(): List&lt;Method_callContext&gt;
++method_call(i: int): Method_callContext
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++scope(): ScopeContext
++Scope_bodyContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+For_loopContext
+--
+--
++FOR(): TerminalNode
++LBRACK(): TerminalNode
++SEMICOLON(): List&lt;TerminalNode&gt;
++SEMICOLON(i: int): TerminalNode
++condition(): ConditionContext
++expression(): List&lt;ExpressionContext&gt;
++expression(i: int): ExpressionContext
++RBRACK(): TerminalNode
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++For_loopContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+For_each_loopContext
+--
+--
++FOR(): TerminalNode
++LBRACK(): TerminalNode
++variable_def(): Variable_defContext
++RBRACK(): TerminalNode
++method_call(): List&lt;Method_callContext&gt;
++method_call(i: int): Method_callContext
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++SEMICOLON(): TerminalNode
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++expression(): ExpressionContext
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++THIS(): TerminalNode
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++For_each_loopContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+While_loopContext
+--
+--
++WHILE(): TerminalNode
++LBRACK(): TerminalNode
++condition(): ConditionContext
++RBRACK(): TerminalNode
++SEMICOLON(): TerminalNode
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++expression(): ExpressionContext
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++While_loopContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Do_while_loopContext
+--
+--
++DO(): TerminalNode
++scope(): ScopeContext
++WHILE(): TerminalNode
++LBRACK(): TerminalNode
++condition(): ConditionContext
++RBRACK(): TerminalNode
++SEMICOLON(): TerminalNode
++Do_while_loopContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Class_defContext
+--
+--
++CLASS(): TerminalNode
++class_name(): List&lt;Class_nameContext&gt;
++class_name(i: int): Class_nameContext
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++accessmod(): AccessmodContext
++ABSTRACT(): TerminalNode
++STATIC(): TerminalNode
++FINAL(): TerminalNode
++EXTENDS(): TerminalNode
++IMPLEMENTS(): TerminalNode
++interface_name(): List&lt;Interface_nameContext&gt;
++interface_name(i: int): Interface_nameContext
++static_block(): List&lt;Static_blockContext&gt;
++static_block(i: int): Static_blockContext
++constructor(): List&lt;ConstructorContext&gt;
++constructor(i: int): ConstructorContext
++method(): List&lt;MethodContext&gt;
++method(i: int): MethodContext
++attribute(): List&lt;AttributeContext&gt;
++attribute(i: int): AttributeContext
++class_def(): List&lt;Class_defContext&gt;
++class_def(i: int): Class_defContext
++Class_defContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Interface_defContext
+--
+--
++INTERFACE(): TerminalNode
++interface_name(): Interface_nameContext
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++accessmod(): AccessmodContext
++EXTENDS(): TerminalNode
++class_name(): Class_nameContext
++method_sig(): List&lt;Method_sigContext&gt;
++method_sig(i: int): Method_sigContext
++SEMICOLON(): List&lt;TerminalNode&gt;
++SEMICOLON(i: int): TerminalNode
++Interface_defContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Class_nameContext
+--
+--
++IDENTIFIER(): TerminalNode
++generic_type_name(): Generic_type_nameContext
++Class_nameContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Interface_nameContext
+--
+--
++IDENTIFIER(): TerminalNode
++generic_type_name(): Generic_type_nameContext
++Interface_nameContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Static_blockContext
+--
+--
++STATIC(): TerminalNode
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++attribute(): List&lt;AttributeContext&gt;
++attribute(i: int): AttributeContext
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++Static_blockContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Try_blockContext
+--
+--
++TRY(): TerminalNode
++scope(): List&lt;ScopeContext&gt;
++scope(i: int): ScopeContext
++CATCH(): List&lt;TerminalNode&gt;
++CATCH(i: int): TerminalNode
++LBRACK(): List&lt;TerminalNode&gt;
++LBRACK(i: int): TerminalNode
++datatype(): List&lt;DatatypeContext&gt;
++datatype(i: int): DatatypeContext
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++RBRACK(): List&lt;TerminalNode&gt;
++RBRACK(i: int): TerminalNode
++FINALLY(): TerminalNode
++Try_blockContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Switch_blockContext
+--
+--
++SWITCH(): TerminalNode
++LBRACK(): TerminalNode
++expression(): ExpressionContext
++RBRACK(): TerminalNode
++switch_scope(): Switch_scopeContext
++Switch_blockContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Switch_scopeContext
+--
+--
++LCBRACK(): TerminalNode
++RCBRACK(): TerminalNode
++case_block(): List&lt;Case_blockContext&gt;
++case_block(i: int): Case_blockContext
++Switch_scopeContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Case_blockContext
+--
+--
++DEFAULT(): TerminalNode
++CASE(): TerminalNode
++scope_body(): List&lt;Scope_bodyContext&gt;
++scope_body(i: int): Scope_bodyContext
++BREAK(): TerminalNode
++SEMICOLON(): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++STRING_CONST(): TerminalNode
++Digits(): TerminalNode
++HexDigits(): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++Case_blockContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Method_nameContext
+--
+--
++IDENTIFIER(): TerminalNode
++STRING(): TerminalNode
++Method_nameContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Generic_type_nameContext
+--
+--
++LPBRACK(): TerminalNode
++RPBRACK(): TerminalNode
++IDENTIFIER(): List&lt;TerminalNode&gt;
++IDENTIFIER(i: int): TerminalNode
++datatype(): DatatypeContext
++EXTENDS(): TerminalNode
++DOT(): List&lt;TerminalNode&gt;
++DOT(i: int): TerminalNode
++Generic_type_nameContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Comp_opContext
+--
+--
++INSTANCEOF(): TerminalNode
++Comp_opContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+{innerclass
+Math_opContext
+--
+--
++Math_opContext(parent: ParserRuleContext, invokingState: int)
++enterRule(listener: ParseTreeListener)
++exitRule(listener: ParseTreeListener)
++accept(visitor: ParseTreeVisitor&lt;?extendsT&gt;): &lt;T&gt;T
+
+innerclass}
+</panel_attributes><additional_attributes/>
+</element>
 <element><id>UMLClass</id><coordinates><x>1760</x><y>10</y><w>300</w><h>600</h> </coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
-JavaLexerVisitor<T>
+JavaLexerVisitor&lt;T&gt;
 --
 --
 visitR(ctx: JavaLexerParser.RContext): T
@@ -255,7 +1028,7 @@ _- DEFAULT_OUTPUT_FILE: String_
 +getHSize(): int
 </panel_attributes><additional_attributes/>
 </element>
-<element><id>UMLClass</id><coordinates><x>3860</x><y>10</y><w>300</w><h>547</h> </coordinates><panel_attributes>/GetMethods/
+<element><id>UMLClass</id><coordinates><x>3860</x><y>10</y><w>300</w><h>560</h> </coordinates><panel_attributes>/GetMethods/
 --
 _+ classCount: int_
 # methods: ArrayList&lt;Method&gt;
@@ -292,6 +1065,7 @@ _+ classCount: int_
 +getImplementedInterfacesRef(): ArrayList&lt;GetMethods&gt;
 +getParent(): GetMethods
 +setParent(parent: GetMethods)
++toString(): String
 /</panel_attributes><additional_attributes/>
 </element>
 <element><id>UMLClass</id><coordinates><x>4210</x><y>10</y><w>300</w><h>209</h> </coordinates><panel_attributes>Interface
@@ -349,5 +1123,209 @@ _+ classCount: int_
 +setName(name: String)
 +toString(): String
 </panel_attributes><additional_attributes/>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>1210</x>
+<y>1135</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;&lt;.</panel_attributes>
+<additional_attributes>0.0;0.0;-1050.0;-1020.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>1910</x>
+<y>610</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;&lt;.</panel_attributes>
+<additional_attributes>0.0;0.0;-1400.0;-495.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>3310</x>
+<y>297</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-1050.0;78.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>4010</x>
+<y>570</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-1750.0;-195.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>5060</x>
+<y>206</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-2800.0;169.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>4710</x>
+<y>453</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-2450.0;-78.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>3660</x>
+<y>505</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-1400.0;-130.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>4360</x>
+<y>219</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-2100.0;156.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>160</x>
+<y>115</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;2100.0;260.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>5060</x>
+<y>206</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-2450.0;0.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>4710</x>
+<y>453</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-2100.0;-247.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>1560</x>
+<y>1259</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;1400.0;-949.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>2960</x>
+<y>310</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;0.0;0.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>3660</x>
+<y>505</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;0.0;0.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>4010</x>
+<y>570</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;-350.0;-65.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>4360</x>
+<y>219</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;0.0;0.0;</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>4010</x>
+<y>570</y>
+<w>0</w>
+<h>0</h>
+</coordinates>
+<panel_attributes>lt=&lt;&lt;-</panel_attributes>
+<additional_attributes>0.0;0.0;350.0;-351.0;</additional_attributes>
 </element>
 </diagram>
